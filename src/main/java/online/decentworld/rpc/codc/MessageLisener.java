@@ -1,8 +1,8 @@
 package online.decentworld.rpc.codc;
 
-import online.decentworld.rpc.dto.message.BaseMessage;
+import online.decentworld.rpc.dto.message.MessageWrapper;
 
 public interface MessageLisener {
 
-	void onMessageReceive(BaseMessage msg);
+	void onMessageReceive(MessageWrapper msg);
 }

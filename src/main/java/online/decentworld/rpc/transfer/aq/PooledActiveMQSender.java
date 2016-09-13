@@ -1,7 +1,7 @@
 package online.decentworld.rpc.transfer.aq;
 
-import online.decentworld.rpc.dto.message.BaseMessage;
-import online.decentworld.rpc.dto.message.MessageRecipient;
+import online.decentworld.rpc.codc.Codec;
+import online.decentworld.rpc.dto.message.MessageWrapper;
 import online.decentworld.rpc.transfer.Sender;
 import online.decentworld.rpc.transfer.TransferPolicy;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -17,11 +17,12 @@ public class PooledActiveMQSender implements Sender{
 	
 	private PooledConnectionFactory pooledFactory;
 	private PooledConnection conn;
+	private Codec codec;
 	private static Logger logger=LoggerFactory.getLogger(PooledActiveMQSender.class);
 	
 	
 	@Override
-	public void send(byte[] data, MessageRecipient receiver,
+	public void send(byte[] data, String receiver,
 			TransferPolicy policy) throws Exception {
 		
 		if(check(data, receiver, policy)){
@@ -31,9 +32,9 @@ public class PooledActiveMQSender implements Sender{
 			msg.writeBytes(data);
 			Destination d=null;
 			if(DestinationType.QUEUE==aqp.getType()){
-				d=session.createQueue((String)receiver.getDestination());	
+				d=session.createQueue(receiver);
 			}else{
-				d=session.createTopic((String)receiver.getDestination());
+				d=session.createTopic(receiver);
 			}
 			MessageProducer producer=session.createProducer(d);
 			producer.setDeliveryMode(aqp.getSessionMode());
@@ -41,11 +42,11 @@ public class PooledActiveMQSender implements Sender{
 		}
 	}
 	
-	public void send(BaseMessage msg,MessageRecipient receiver) throws Exception{
-		send(msg.getWriteByte(), receiver,ActiveMQPolicy.BRIEF);
+	public void send(MessageWrapper msg,String receiver) throws Exception{
+		send(codec.encode(msg), receiver,ActiveMQPolicy.BRIEF);
 	}
 	
-	private boolean check(byte[] data, MessageRecipient receiver,
+	private boolean check(byte[] data, String receiver,
 			TransferPolicy policy){
 		if(!(policy instanceof ActiveMQPolicy)){
 			return false;

@@ -1,13 +1,13 @@
 package online.decentworld.rpc.codc.protos;
 
+import online.decentworld.rpc.dto.message.types.ChatMessageType;
+import online.decentworld.rpc.dto.message.types.MessageType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
-
-import online.decentworld.rpc.dto.message.ChatMessageType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ReflectBodyCodecFactory implements ProtosBodyCodecFactory{
 
@@ -31,7 +31,7 @@ public class ReflectBodyCodecFactory implements ProtosBodyCodecFactory{
 		}
 	}
 	@Override
-	public ProtosMessageCodec getMessageCodec(ChatMessageType type) {
+	public ProtosMessageCodec getMessageCodec(MessageType type) {
 		try {
 			return map.get(type).newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
@@ -42,7 +42,7 @@ public class ReflectBodyCodecFactory implements ProtosBodyCodecFactory{
 
 	public static void main(String[] args) {
 		ReflectBodyCodecFactory f=new ReflectBodyCodecFactory();
-		ProtosMessageCodec p=f.getMessageCodec(ChatMessageType.VEDIO_LIKE);
+		ProtosMessageCodec p=f.getMessageCodec(MessageType.LIKE);
 		System.out.println(p);
 	}
 }

@@ -2,7 +2,7 @@ package online.decentworld.rpc.dto.message;
 
 import java.util.Date;
 
-public abstract class LikeMessageBody implements MessageBody {
+public final class LikeMessageBody implements MessageBody {
 
 	private final String icon;
 	private final String name;

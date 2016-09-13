@@ -1,17 +1,17 @@
 package online.decentworld.rpc.codc;
 
-import online.decentworld.rpc.dto.message.BaseMessage;
+import online.decentworld.rpc.dto.message.MessageWrapper;
 
 
 public interface Codec {
 
-	BaseMessage decode(byte[] data);
+	MessageWrapper decode(byte[] data);
 
-	byte[] encode(BaseMessage msg);
+	byte[] encode(MessageWrapper msg);
 	
 	void receiveData(byte[] data);
 	
 	void addLisener(MessageLisener lisener);
 	
-	void notifyLisener(BaseMessage msg);
+	void notifyLisener(MessageWrapper msg);
 }

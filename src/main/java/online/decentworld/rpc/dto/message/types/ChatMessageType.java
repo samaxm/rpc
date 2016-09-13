@@ -1,4 +1,4 @@
-package online.decentworld.rpc.dto.message;
+package online.decentworld.rpc.dto.message.types;
 
 public enum ChatMessageType {
 	TXT(0),
@@ -13,7 +13,7 @@ public enum ChatMessageType {
 	public int getCode() {
 		return code;
 	}
-	public static ChatMessageType getMessageType(int code){
+	public static ChatMessageType getChatMessageType(int code){
 		for(ChatMessageType type: ChatMessageType.values()){
 			if(type.getCode()==code){
 				return type;

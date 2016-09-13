@@ -1,14 +1,14 @@
 package online.decentworld.rpc.codc;
 
-import online.decentworld.rpc.dto.message.BaseMessage;
+import online.decentworld.rpc.dto.message.MessageWrapper;
 
 public abstract class AbstractCodec implements Codec{
 
-	public abstract BaseMessage decode(byte[] data);
+	public abstract MessageWrapper decode(byte[] data);
 
 	@Override
 	public void receiveData(byte[] data) {
-		BaseMessage msg=decode(data);
+		MessageWrapper msg=decode(data);
 		if(msg!=null){
 			notifyLisener(msg);
 		}
@@ -16,6 +16,6 @@ public abstract class AbstractCodec implements Codec{
 
 	public abstract void addLisener(MessageLisener lisener);
 
-	public abstract void notifyLisener(BaseMessage msg);
+	public abstract void notifyLisener(MessageWrapper msg);
 
 }

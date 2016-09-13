@@ -1,4 +1,4 @@
-package online.decentworld.rpc.dto.message;
+package online.decentworld.rpc.dto.message.types;
 
 /**
  * Created by Sammax on 2016/9/13.
