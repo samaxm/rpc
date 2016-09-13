@@ -2,14 +2,12 @@ package online.decentworld.rpc.dto.message;
 
 public interface BaseMessage {
 
-	public MessageRecipient getSender();
+	public String getSender();
 	
-	public MessageRecipient getReceiver();
+	public String getReceiver();
 	
-	public MessageType getMessageType();
+	public ChatMessageType getMessageType();
 	
 	public MessageBody getMessageBody();
-	
-	public byte[] getWriteByte();
-	
+
 }

@@ -1,31 +1,17 @@
 package online.decentworld.rpc.transfer.aq;
 
-import java.util.Date;
-
-import javax.jms.BytesMessage;
-import javax.jms.Connection;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-
-import online.decentworld.rpc.codc.MessageLisener;
-import online.decentworld.rpc.codc.protos.SimpleProtosCodec;
 import online.decentworld.rpc.dto.message.BaseMessage;
 import online.decentworld.rpc.dto.message.MessageRecipient;
-import online.decentworld.rpc.dto.message.SimpleMessageRecipient;
-import online.decentworld.rpc.dto.message.protos.ProtosVedioLikeMessage;
-import online.decentworld.rpc.dto.message.protos.ProtosVedioLikeMessageBody;
 import online.decentworld.rpc.transfer.Sender;
 import online.decentworld.rpc.transfer.TransferPolicy;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.jms.pool.PooledConnection;
 import org.apache.activemq.pool.PooledConnectionFactory;
 import org.apache.activemq.store.kahadb.data.KahaDestination.DestinationType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.jms.*;
 
 public class PooledActiveMQSender implements Sender{
 	
@@ -99,43 +85,43 @@ public class PooledActiveMQSender implements Sender{
 	}
 	
 	public static void main(String[] args) {
-		new Thread(()->{
-			System.out.println("------consumer-----");
-			Connection connection=AQConnetionHelper.getConn();
-			javax.jms.Session session=null;
-			try {
-				session=connection.createSession(false,javax.jms.Session.AUTO_ACKNOWLEDGE);
-				Destination d=session.createQueue("testA");
-				MessageConsumer consumer=session.createConsumer(d);
-				while(true){
-					BytesMessage msg=(BytesMessage)consumer.receive();
-					byte[] data=new byte[(int) msg.getBodyLength()];
-					msg.readBytes(data);
-					System.out.println(data.length);
-					SimpleProtosCodec codec=new SimpleProtosCodec();
-					codec.addLisener(new MessageLisener() {
-						@Override
-						public void onMessageReceive(BaseMessage msg) {
-							if(msg instanceof ProtosVedioLikeMessage){
-								ProtosVedioLikeMessage m=(ProtosVedioLikeMessage)msg;
-								ProtosVedioLikeMessageBody body=(ProtosVedioLikeMessageBody)m.getMessageBody();
-								System.out.println(body.getName());
-							}
-						}
-					});
-					codec.receiveData(data);
-				}
-			} catch (JMSException e) {
-				e.printStackTrace();
-			}
-		}).start();
-		
- 		PooledActiveMQSender sender=new PooledActiveMQSender();
-		ProtosVedioLikeMessageBody body=new ProtosVedioLikeMessageBody("123", "sam", "123", "123", "1", new Date()); 
-		try {
-			sender.send(ProtosVedioLikeMessage.create(body), new SimpleMessageRecipient("testA"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		new Thread(()->{
+//			System.out.println("------consumer-----");
+//			Connection connection=AQConnetionHelper.getConn();
+//			javax.jms.Session session=null;
+//			try {
+//				session=connection.createSession(false,javax.jms.Session.AUTO_ACKNOWLEDGE);
+//				Destination d=session.createQueue("testA");
+//				MessageConsumer consumer=session.createConsumer(d);
+//				while(true){
+//					BytesMessage msg=(BytesMessage)consumer.receive();
+//					byte[] data=new byte[(int) msg.getBodyLength()];
+//					msg.readBytes(data);
+//					System.out.println(data.length);
+//					SimpleProtosCodec codec=new SimpleProtosCodec();
+//					codec.addLisener(new MessageLisener() {
+//						@Override
+//						public void onMessageReceive(BaseMessage msg) {
+//							if(msg instanceof ProtosVedioLikeMessage){
+//								ProtosVedioLikeMessage m=(ProtosVedioLikeMessage)msg;
+//								ProtosVedioLikeMessageBody body=(ProtosVedioLikeMessageBody)m.getMessageBody();
+//								System.out.println(body.getName());
+//							}
+//						}
+//					});
+//					codec.receiveData(data);
+//				}
+//			} catch (JMSException e) {
+//				e.printStackTrace();
+//			}
+//		}).start();
+//
+// 		PooledActiveMQSender sender=new PooledActiveMQSender();
+//		ProtosVedioLikeMessageBody body=new ProtosVedioLikeMessageBody("123", "sam", "123", "123", "1", new Date());
+//		try {
+//			sender.send(ProtosVedioLikeMessage.create(body), new SimpleMessageRecipient("testA"));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 	}
 }

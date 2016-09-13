@@ -1,18 +1,16 @@
 package online.decentworld.rpc.codc.protos;
 
-import java.util.LinkedList;
-import java.util.List;
-
+import com.google.protobuf.InvalidProtocolBufferException;
 import online.decentworld.rpc.codc.AbstractCodec;
 import online.decentworld.rpc.codc.MessageLisener;
 import online.decentworld.rpc.dto.message.BaseMessage;
-import online.decentworld.rpc.dto.message.MessageType;
+import online.decentworld.rpc.dto.message.ChatMessageType;
 import online.decentworld.rpc.dto.message.protos.MessageProtos.Message;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.protobuf.InvalidProtocolBufferException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class SimpleProtosCodec extends AbstractCodec{
 
@@ -52,7 +50,7 @@ public class SimpleProtosCodec extends AbstractCodec{
 	}
 	
 	private BaseMessage messageParser(Message msg){
-		MessageType type=MessageType.getMessageType(msg.getType());
+		ChatMessageType type= ChatMessageType.getMessageType(msg.getType().getNumber());
 		if(type!=null){
 			try {
 				return codecFactory.getMessageCodec(type).parseMessage(msg);

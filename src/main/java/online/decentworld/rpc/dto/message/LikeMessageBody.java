@@ -2,7 +2,7 @@ package online.decentworld.rpc.dto.message;
 
 import java.util.Date;
 
-public abstract class VedioLikeMessageBody implements MessageBody {
+public abstract class LikeMessageBody implements MessageBody {
 
 	private final String icon;
 	private final String name;
@@ -12,8 +12,8 @@ public abstract class VedioLikeMessageBody implements MessageBody {
 	private final Date time ;
 	
 	
-	public VedioLikeMessageBody(String icon, String name, String likeID,
-			String beLikedID, String sex, Date time) {
+	public LikeMessageBody(String icon, String name, String likeID,
+						   String beLikedID, String sex, Date time) {
 		super();
 		this.icon = icon;
 		this.name = name;
