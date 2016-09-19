@@ -4,7 +4,6 @@ import com.google.protobuf.ByteString;
 import online.decentworld.rpc.dto.message.LikeMessageBody;
 import online.decentworld.rpc.dto.message.MessageBody;
 import online.decentworld.rpc.dto.message.MessageWrapper;
-import online.decentworld.rpc.dto.message.protos.MessageProtos.Message;
 import online.decentworld.rpc.dto.message.protos.MessageProtos.VedioLikeMessageInfo;
 
 import java.util.Date;
@@ -14,8 +13,8 @@ public class LikeMessageCodec extends ProcosMessageWrapper{
 	
 	
 	@Override
-	public MessageWrapper warpMessageBody(MessageWrapper wrapper,Message data) throws Exception {
-		VedioLikeMessageInfo info=VedioLikeMessageInfo.parseFrom(data.getData());
+	public MessageWrapper warpMessageBody(MessageWrapper wrapper,ByteString bodyData) throws Exception {
+		VedioLikeMessageInfo info=VedioLikeMessageInfo.parseFrom(bodyData);
 		LikeMessageBody likeMessageBody=new LikeMessageBody(info.getIcon(),info.getName(),info.getLikeID(),info.getBelikeID(),info.getSex(),new Date(info.getTime()));
 		wrapper.setBody(likeMessageBody);
 		return wrapper;

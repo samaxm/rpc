@@ -3,7 +3,6 @@ package online.decentworld.rpc.dto.message;
 import online.decentworld.rpc.dto.message.types.ChatMessageType;
 import online.decentworld.rpc.dto.message.types.ChatRelation;
 import online.decentworld.rpc.dto.message.types.ChatStatus;
-import online.decentworld.rpc.dto.message.types.ChatrDirect;
 
 /**
  * Created by Sammax on 2016/9/13.
@@ -29,13 +28,24 @@ public class ImageChatMessage extends ChatMessage {
     }
 
 
-    public ImageChatMessage(ChatStatus status, String receiverWealth, String tempID, long mid, ChatrDirect direct, long time, ChatRelation relation, ChatMessageType type, byte[] compress,String url) {
-        super(status, receiverWealth, tempID, mid, direct, time, relation, type);
+    public ImageChatMessage(ChatStatus status, String receiverWealth, String tempID, long mid,long time, ChatRelation relation, ChatMessageType type, String fromID, String toID, byte[] compress, String url) {
+        super(status, receiverWealth, tempID, mid, time, relation, type, fromID, toID);
         this.compress = compress;
-        this.url=url;
+        this.url = url;
     }
 
     public ImageChatMessage() {
 
+    }
+
+    public static ImageChatMessage createImageMessage(String from,String to,byte[] compress,String url){
+        ImageChatMessage msg=new ImageChatMessage();
+        msg.setType(ChatMessageType.IMAGE);
+        msg.setToID(to);
+        msg.setFromID(from);
+        msg.setCompress(compress);
+        msg.setUrl(url);
+        msg.setSendDefault();
+        return msg;
     }
 }

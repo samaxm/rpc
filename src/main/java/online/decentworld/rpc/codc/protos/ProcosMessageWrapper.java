@@ -18,7 +18,7 @@ public abstract class ProcosMessageWrapper implements ProtosMessageCodec{
         wrapper.setSender(msg.getFrom());
         wrapper.setReceiver(msg.getTo());
         wrapper.setType(MessageType.getMessageType(msg.getType().getNumber()));
-        wrapper=warpMessageBody(wrapper,msg);
+        wrapper=warpMessageBody(wrapper,msg.getData());
         return wrapper;
     }
 
@@ -30,7 +30,7 @@ public abstract class ProcosMessageWrapper implements ProtosMessageCodec{
                 .setType(MessageProtos.Message.MessageType.forNumber(wrapper.getType().getCode())).setData(data).build().toByteArray();
     }
 
-    abstract  protected MessageWrapper warpMessageBody(MessageWrapper wrapper,MessageProtos.Message msg) throws Exception;
+    abstract  protected MessageWrapper warpMessageBody(MessageWrapper wrapper,ByteString bodyData) throws Exception;
 
     abstract  protected ByteString encodeMessageBody(MessageBody body) throws Exception;
 }

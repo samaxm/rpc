@@ -6,7 +6,6 @@ import online.decentworld.rpc.dto.message.protos.MessageProtos;
 import online.decentworld.rpc.dto.message.types.ChatMessageType;
 import online.decentworld.rpc.dto.message.types.ChatRelation;
 import online.decentworld.rpc.dto.message.types.ChatStatus;
-import online.decentworld.rpc.dto.message.types.ChatrDirect;
 
 /**
  * Created by Sammax on 2016/9/14.
@@ -14,27 +13,26 @@ import online.decentworld.rpc.dto.message.types.ChatrDirect;
 public class ChatMessageCodec extends ProcosMessageWrapper {
 
 
-
     @Override
-    protected MessageWrapper warpMessageBody(MessageWrapper wrapper, MessageProtos.Message msg) throws Exception {
-        MessageProtos.ChatMessage cm= MessageProtos.ChatMessage.parseFrom(msg.getData());
-        MessageProtos.ChatMessage.ChatMessageType type=cm.getMessageType();
+    protected MessageWrapper warpMessageBody(MessageWrapper wrapper, ByteString bodyData) throws Exception {
+        MessageProtos.ChatMessage cm= MessageProtos.ChatMessage.parseFrom(bodyData);
+        MessageProtos.ChatMessageType type=cm.getMessageType();
         ChatMessage chatMessage=null;
         switch (type){
             case TEXT:
                 MessageProtos.TextChatMessageInfo text=MessageProtos.TextChatMessageInfo.parseFrom(cm.getContent());
-                chatMessage=new TextChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(), ChatrDirect.getChatrDirect(cm.getDirect()),cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
-                    , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),text.getText());
+                chatMessage=new TextChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(),cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
+                    , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),cm.getFromID(),cm.getToID(),text.getText());
                 break;
             case AUDIO:
                 MessageProtos.AudioChatMessageInfo audio=MessageProtos.AudioChatMessageInfo.parseFrom(cm.getContent());
-                chatMessage=new AudioChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(), ChatrDirect.getChatrDirect(cm.getDirect()),cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
-                        , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),audio.getLength(),audio.getUrl());
+                chatMessage=new AudioChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(), cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
+                        , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),cm.getFromID(),cm.getToID(),audio.getLength(),audio.getUrl());
                 break;
             case IMAGE:
                 MessageProtos.ImageChatMessageInfo image=MessageProtos.ImageChatMessageInfo.parseFrom(cm.getContent());
-                chatMessage=new ImageChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(), ChatrDirect.getChatrDirect(cm.getDirect()),cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
-                        , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),image.getCompress().toByteArray(),image.getUrl());
+                chatMessage=new ImageChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(),cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
+                        , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),cm.getFromID(),cm.getToID(),image.getCompress().toByteArray(),image.getUrl());
                 break;
 
         }
@@ -60,10 +58,11 @@ public class ChatMessageCodec extends ProcosMessageWrapper {
                         .build().toByteString();
                 break;
         }
-        return MessageProtos.ChatMessage.newBuilder().setTime(cm.getTime()).setContent(info).setDirect(cm.getDirect().getCode())
-                .setMessageType(MessageProtos.ChatMessage.ChatMessageType.forNumber(cm.getType().getCode())).setMid(cm.getMid())
-                .setReceiverWealth(cm.getReceiverWealth()).setRelationType(MessageProtos.ChatMessage.FriendType.forNumber(cm.getRelation().getCode()))
-                .setStatus(MessageProtos.ChatMessage.ChargeStatus.forNumber(cm.getStatus().getCode())).setTempID(cm.getTempID())
+        return MessageProtos.ChatMessage.newBuilder().setTime(cm.getTime()).setContent(info)
+                .setMessageType(MessageProtos.ChatMessageType.forNumber(cm.getType().getCode())).setMid(cm.getMid())
+                .setReceiverWealth(cm.getReceiverWealth()).setRelationType(MessageProtos.FriendType.forNumber(cm.getRelation().getCode()))
+                .setStatus(MessageProtos.ChargeStatus.forNumber(cm.getStatus().getCode())).setTempID(cm.getTempID())
+                .setFromID(cm.getFromID()).setToID(cm.getToID())
                 .build().toByteString();
 
     }

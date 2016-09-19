@@ -1,6 +1,5 @@
 package online.decentworld.rpc.codc.protos;
 
-import online.decentworld.rpc.dto.message.types.ChatMessageType;
 import online.decentworld.rpc.dto.message.types.MessageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,19 +10,20 @@ import java.util.Properties;
 
 public class ReflectBodyCodecFactory implements ProtosBodyCodecFactory{
 
-	private final HashMap<ChatMessageType,Class<? extends ProtosMessageCodec>> map;
+	private final HashMap<MessageType,Class<? extends ProtosMessageCodec>> map;
 	private static Logger logger=LoggerFactory.getLogger(ReflectBodyCodecFactory.class);
 	
 	public ReflectBodyCodecFactory(){
-		map=new HashMap<ChatMessageType, Class<? extends ProtosMessageCodec>>();
+		map=new HashMap<MessageType, Class<? extends ProtosMessageCodec>>();
 		Properties pro=new Properties();
 		try {
-			pro.load(ReflectBodyCodecFactory.class.getResourceAsStream("protos-codec-mapper.properties"));
+
+			pro.load(ReflectBodyCodecFactory.class.getClassLoader().getResourceAsStream("protos-codec-mapper.properties"));
 			for(String type:pro.stringPropertyNames()){
-				if(type!=null&& ChatMessageType.valueOf(type)!=null&&pro.getProperty(type)!=null){
+				if(type!=null&& MessageType.valueOf(type)!=null&&pro.getProperty(type)!=null){
 					@SuppressWarnings("unchecked")
 					Class<? extends ProtosMessageCodec> c=(Class<? extends ProtosMessageCodec>)Class.forName(pro.getProperty(type));
-					map.put(ChatMessageType.valueOf(type),c);
+					map.put(MessageType.valueOf(type),c);
 				}
 			}
 		} catch (IOException | ClassNotFoundException e) {

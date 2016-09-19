@@ -15,12 +15,20 @@ import java.util.List;
 public class SimpleProtosCodec extends AbstractCodec{
 
 	private static Logger logger=LoggerFactory.getLogger(SimpleProtosCodec.class);
-	
+
 	private ProtosBodyCodecFactory codecFactory;
 	
 	private List<MessageLisener> list=new LinkedList<MessageLisener>();
-	
-	
+
+	public ProtosBodyCodecFactory getCodecFactory() {
+		return codecFactory;
+	}
+
+	public void setCodecFactory(ProtosBodyCodecFactory codecFactory) {
+		this.codecFactory = codecFactory;
+	}
+
+
 	@Override
 	public MessageWrapper decode(byte[] data) {
 		try {
@@ -40,6 +48,7 @@ public class SimpleProtosCodec extends AbstractCodec{
 			try {
 				return codec.encodeMessage(msg);
 			} catch (Exception e) {
+				e.printStackTrace();
 				logger.warn("[PARSE_MESSAGE_FAILED]",e);
 			}
 		}else{

@@ -19,6 +19,10 @@ public class MessageWrapper {
 		this.body = body;
 	}
 
+	public static MessageWrapper  wrapChatMessage(ChatMessage msg){
+		return new MessageWrapper(msg.getFromID(),msg.getToID(),MessageType.CHAT,msg);
+	}
+
 	public MessageWrapper() {
 
 	}
