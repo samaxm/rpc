@@ -2,7 +2,7 @@ package online.decentworld.rpc.codc.protos;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import online.decentworld.rpc.codc.AbstractCodec;
-import online.decentworld.rpc.codc.MessageLisener;
+import online.decentworld.rpc.codc.MessageListener;
 import online.decentworld.rpc.dto.message.types.MessageType;
 import online.decentworld.rpc.dto.message.MessageWrapper;
 import online.decentworld.rpc.dto.message.protos.MessageProtos.Message;
@@ -16,18 +16,19 @@ public class SimpleProtosCodec extends AbstractCodec{
 
 	private static Logger logger=LoggerFactory.getLogger(SimpleProtosCodec.class);
 
-	private ProtosBodyCodecFactory codecFactory;
+
+	private ProtosBodyConverterFactory converterFactory;
 	
-	private List<MessageLisener> list=new LinkedList<MessageLisener>();
+	private List<MessageListener> list=new LinkedList<MessageListener>();
 
-	public ProtosBodyCodecFactory getCodecFactory() {
-		return codecFactory;
+
+	public ProtosBodyConverterFactory getConverterFactory() {
+		return converterFactory;
 	}
 
-	public void setCodecFactory(ProtosBodyCodecFactory codecFactory) {
-		this.codecFactory = codecFactory;
+	public void setConverterFactory(ProtosBodyConverterFactory converterFactory) {
+		this.converterFactory = converterFactory;
 	}
-
 
 	@Override
 	public MessageWrapper decode(byte[] data) {
@@ -43,10 +44,10 @@ public class SimpleProtosCodec extends AbstractCodec{
 
 	@Override
 	public byte[] encode(MessageWrapper msg) {
-		ProtosMessageCodec codec=getMessageCodec(msg.getType());
-		if(codec!=null){
+		ProtosMessageConverter converter=getMessageConverter(msg.getType());
+		if(converter!=null){
 			try {
-				return codec.encodeMessage(msg);
+				return converter.convertFromBean2Protos(msg).toByteArray();
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.warn("[PARSE_MESSAGE_FAILED]",e);
@@ -58,17 +59,18 @@ public class SimpleProtosCodec extends AbstractCodec{
 	}
 
 	@Override
-	public void addLisener(MessageLisener lisener) {
+	public void addListener(MessageListener listener) {
 		synchronized (this) {
-			list.add(lisener);
+			list.add(listener);
 		}
 	}
 
+
 	@Override
-	public void notifyLisener(MessageWrapper msg) {
+	public void notifyListener(MessageWrapper msg) {
 		if(msg!=null){
-			for(MessageLisener lisener:list){
-				lisener.onMessageReceive(msg);
+			for(MessageListener listener:list){
+				listener.onMessageReceive(msg);
 			}
 		}
 	}
@@ -77,7 +79,7 @@ public class SimpleProtosCodec extends AbstractCodec{
 		MessageType type=MessageType.getMessageType(msg.getType().getNumber());
 		if(type!=null){
 			try {
-				return  getMessageCodec(type).parseMessage(msg);
+				return  getMessageConverter(type).convertFromProtos2Bean(msg);
 			} catch (Exception e) {
 				logger.warn("[PARSE_MESSAGE_FAILED]",e);
 			}
@@ -87,8 +89,8 @@ public class SimpleProtosCodec extends AbstractCodec{
 		return null;
 	}
 
-	private ProtosMessageCodec getMessageCodec(MessageType type){
-		return codecFactory.getMessageCodec(type);
+	private ProtosMessageConverter getMessageConverter(MessageType type){
+		return converterFactory.getMessageConverter(type);
 	}
 
 }

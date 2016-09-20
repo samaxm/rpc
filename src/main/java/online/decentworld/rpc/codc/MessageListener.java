@@ -2,7 +2,7 @@ package online.decentworld.rpc.codc;
 
 import online.decentworld.rpc.dto.message.MessageWrapper;
 
-public interface MessageLisener {
+public interface MessageListener {
 
 	void onMessageReceive(MessageWrapper msg);
 }

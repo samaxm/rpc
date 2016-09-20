@@ -42,7 +42,7 @@ public final class AudioChatMessage extends ChatMessage {
         msg.setFromID(from);
         msg.setLength(length);
         msg.setUrl(url);
-        msg.setType(ChatMessageType.AUDIO);
+        msg.setChatType(ChatMessageType.AUDIO);
         return msg;
     }
 }

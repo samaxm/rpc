@@ -3,6 +3,7 @@ package online.decentworld.rpc.dto.message;
 import online.decentworld.rpc.dto.message.types.ChatMessageType;
 import online.decentworld.rpc.dto.message.types.ChatRelation;
 import online.decentworld.rpc.dto.message.types.ChatStatus;
+import online.decentworld.rpc.dto.message.types.MessageType;
 
 /**
  * Created by Sammax on 2016/9/13.
@@ -15,7 +16,7 @@ public class ChatMessage implements MessageBody {
     private long mid;
     private long time;
     private ChatRelation relation;
-    private ChatMessageType type;
+    private ChatMessageType chatType;
     private String fromID;
 
     public String getFromID() {
@@ -45,7 +46,7 @@ public class ChatMessage implements MessageBody {
         this.mid = mid;
         this.time = time;
         this.relation = relation;
-        this.type = type;
+        this.chatType = type;
         this.fromID = fromID;
         this.toID = toID;
     }
@@ -131,11 +132,16 @@ public class ChatMessage implements MessageBody {
         this.relation = relation;
     }
 
-    public ChatMessageType getType() {
-        return type;
+    public ChatMessageType getChatType() {
+        return chatType;
     }
 
-    public void setType(ChatMessageType type) {
-        this.type = type;
+    public void setChatType(ChatMessageType chatType) {
+        this.chatType = chatType;
     }
+    @Override
+    public MessageType getType() {
+        return MessageType.CHAT;
+    }
+
 }

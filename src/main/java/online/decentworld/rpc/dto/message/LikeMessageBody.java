@@ -1,5 +1,7 @@
 package online.decentworld.rpc.dto.message;
 
+import online.decentworld.rpc.dto.message.types.MessageType;
+
 import java.util.Date;
 
 public final class LikeMessageBody implements MessageBody {
@@ -40,8 +42,10 @@ public final class LikeMessageBody implements MessageBody {
 	public Date getTime() {
 		return time;
 	}
-	
-	
-	
-	
+
+
+	@Override
+	public MessageType getType() {
+		return MessageType.LIKE;
+	}
 }

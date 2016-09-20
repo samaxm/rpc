@@ -8,7 +8,7 @@ import online.decentworld.rpc.dto.message.protos.MessageProtos.VedioLikeMessageI
 
 import java.util.Date;
 
-public class LikeMessageCodec extends ProcosMessageWrapper{
+public class LikeMessageConverter extends ProcosMessageWrapper{
 
 	
 	
@@ -26,6 +26,5 @@ public class LikeMessageCodec extends ProcosMessageWrapper{
 		return VedioLikeMessageInfo.newBuilder().setBelikeID(likebody.getBeLikedID()).setIcon(likebody.getIcon())
 				.setLikeID(likebody.getLikeID()).setName(likebody.getName()).setSex(likebody.getSex())
 				.setTime(likebody.getTime().getTime()).build().toByteString();
-
 	}
 }

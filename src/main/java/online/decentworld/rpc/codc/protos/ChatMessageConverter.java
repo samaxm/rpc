@@ -10,7 +10,7 @@ import online.decentworld.rpc.dto.message.types.ChatStatus;
 /**
  * Created by Sammax on 2016/9/14.
  */
-public class ChatMessageCodec extends ProcosMessageWrapper {
+public class ChatMessageConverter extends ProcosMessageWrapper {
 
 
     @Override
@@ -43,7 +43,7 @@ public class ChatMessageCodec extends ProcosMessageWrapper {
     @Override
     protected ByteString encodeMessageBody(MessageBody body) throws Exception {
         ChatMessage cm=(ChatMessage)body;
-        ChatMessageType type=cm.getType();
+        ChatMessageType type=cm.getChatType();
         ByteString info=null;
         switch (type){
             case TXT:

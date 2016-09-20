@@ -2,6 +2,7 @@ package online.decentworld.rpc.dto.message;
 
 import online.decentworld.rpc.dto.message.types.ChatRelation;
 import online.decentworld.rpc.dto.message.types.ChatStatus;
+import online.decentworld.rpc.dto.message.types.MessageType;
 
 /**
  * Created by Sammax on 2016/9/18.
@@ -72,5 +73,10 @@ final public class WealthAckMessage implements MessageBody{
 
     public void setStatus(ChatStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public MessageType getType() {
+        return MessageType.WEALTH_ACK;
     }
 }

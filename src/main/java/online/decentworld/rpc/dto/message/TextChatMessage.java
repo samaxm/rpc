@@ -34,7 +34,7 @@ public final class TextChatMessage extends ChatMessage {
         msg.setFromID(from);
         msg.setToID(to);
         msg.setText(text);
-        msg.setType(ChatMessageType.TXT);
+        msg.setChatType(ChatMessageType.TXT);
         return msg;
     }
 

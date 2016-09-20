@@ -11,7 +11,7 @@ import online.decentworld.rpc.dto.message.types.ChatStatus;
 /**
  * Created by Sammax on 2016/9/18.
  */
-public class WealthACKMessageCodeec extends ProcosMessageWrapper  {
+public class WealthACKMessageConverter extends ProcosMessageWrapper  {
 
 
     @Override

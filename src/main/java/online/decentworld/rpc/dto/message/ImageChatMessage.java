@@ -40,7 +40,7 @@ public class ImageChatMessage extends ChatMessage {
 
     public static ImageChatMessage createImageMessage(String from,String to,byte[] compress,String url){
         ImageChatMessage msg=new ImageChatMessage();
-        msg.setType(ChatMessageType.IMAGE);
+        msg.setChatType(ChatMessageType.IMAGE);
         msg.setToID(to);
         msg.setFromID(from);
         msg.setCompress(compress);

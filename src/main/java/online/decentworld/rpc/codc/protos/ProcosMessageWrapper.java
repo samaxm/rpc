@@ -9,11 +9,11 @@ import online.decentworld.rpc.dto.message.types.MessageType;
 /**
  * Created by Sammax on 2016/9/13.
  */
-public abstract class ProcosMessageWrapper implements ProtosMessageCodec{
+public abstract class ProcosMessageWrapper implements ProtosMessageConverter {
 
 
     @Override
-    public MessageWrapper parseMessage(MessageProtos.Message msg) throws Exception {
+    public MessageWrapper convertFromProtos2Bean(MessageProtos.Message msg) throws Exception {
         MessageWrapper wrapper=new MessageWrapper();
         wrapper.setSender(msg.getFrom());
         wrapper.setReceiver(msg.getTo());
@@ -24,10 +24,10 @@ public abstract class ProcosMessageWrapper implements ProtosMessageCodec{
 
 
     @Override
-    public byte[] encodeMessage(MessageWrapper wrapper) throws Exception {
+    public MessageProtos.Message convertFromBean2Protos(MessageWrapper wrapper) throws Exception {
         ByteString data=encodeMessageBody(wrapper.getBody());
         return MessageProtos.Message.newBuilder().setTo(wrapper.getReceiver()).setFrom(wrapper.getSender())
-                .setType(MessageProtos.Message.MessageType.forNumber(wrapper.getType().getCode())).setData(data).build().toByteArray();
+                .setType(MessageProtos.Message.MessageType.forNumber(wrapper.getType().getCode())).setData(data).build();
     }
 
     abstract  protected MessageWrapper warpMessageBody(MessageWrapper wrapper,ByteString bodyData) throws Exception;

@@ -1318,6 +1318,760 @@ public final class MessageProtos {
 
   }
 
+  public interface MessageContainerOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:message.MessageContainer)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    java.util.List<Message>
+        getMessagesList();
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    Message getMessages(int index);
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    int getMessagesCount();
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    java.util.List<? extends MessageOrBuilder>
+        getMessagesOrBuilderList();
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    MessageOrBuilder getMessagesOrBuilder(
+            int index);
+  }
+  /**
+   * Protobuf type {@code message.MessageContainer}
+   */
+  public  static final class MessageContainer extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:message.MessageContainer)
+      MessageContainerOrBuilder {
+    // Use MessageContainer.newBuilder() to construct.
+    private MessageContainer(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private MessageContainer() {
+      messages_ = java.util.Collections.emptyList();
+    }
+
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MessageContainer(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                messages_ = new java.util.ArrayList<Message>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              messages_.add(
+                  input.readMessage(Message.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          messages_ = java.util.Collections.unmodifiableList(messages_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return MessageProtos.internal_static_message_MessageContainer_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return MessageProtos.internal_static_message_MessageContainer_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              MessageContainer.class, Builder.class);
+    }
+
+    public static final int MESSAGES_FIELD_NUMBER = 1;
+    private java.util.List<Message> messages_;
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    public java.util.List<Message> getMessagesList() {
+      return messages_;
+    }
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    public java.util.List<? extends MessageOrBuilder>
+        getMessagesOrBuilderList() {
+      return messages_;
+    }
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    public int getMessagesCount() {
+      return messages_.size();
+    }
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    public Message getMessages(int index) {
+      return messages_.get(index);
+    }
+    /**
+     * <code>repeated .message.Message messages = 1;</code>
+     */
+    public MessageOrBuilder getMessagesOrBuilder(
+        int index) {
+      return messages_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      for (int i = 0; i < getMessagesCount(); i++) {
+        if (!getMessages(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < messages_.size(); i++) {
+        output.writeMessage(1, messages_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < messages_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, messages_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    public boolean equals(final Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof MessageContainer)) {
+        return super.equals(obj);
+      }
+      MessageContainer other = (MessageContainer) obj;
+
+      boolean result = true;
+      result = result && getMessagesList()
+          .equals(other.getMessagesList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (getMessagesCount() > 0) {
+        hash = (37 * hash) + MESSAGES_FIELD_NUMBER;
+        hash = (53 * hash) + getMessagesList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static MessageContainer parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static MessageContainer parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static MessageContainer parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static MessageContainer parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static MessageContainer parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static MessageContainer parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static MessageContainer parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static MessageContainer parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static MessageContainer parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static MessageContainer parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(MessageContainer prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code message.MessageContainer}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:message.MessageContainer)
+        MessageContainerOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return MessageProtos.internal_static_message_MessageContainer_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return MessageProtos.internal_static_message_MessageContainer_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                MessageContainer.class, Builder.class);
+      }
+
+      // Construct using online.decentworld.rpc.dto.message.protos.MessageProtos.MessageContainer.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getMessagesFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        if (messagesBuilder_ == null) {
+          messages_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          messagesBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return MessageProtos.internal_static_message_MessageContainer_descriptor;
+      }
+
+      public MessageContainer getDefaultInstanceForType() {
+        return MessageContainer.getDefaultInstance();
+      }
+
+      public MessageContainer build() {
+        MessageContainer result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public MessageContainer buildPartial() {
+        MessageContainer result = new MessageContainer(this);
+        int from_bitField0_ = bitField0_;
+        if (messagesBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            messages_ = java.util.Collections.unmodifiableList(messages_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.messages_ = messages_;
+        } else {
+          result.messages_ = messagesBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof MessageContainer) {
+          return mergeFrom((MessageContainer)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(MessageContainer other) {
+        if (other == MessageContainer.getDefaultInstance()) return this;
+        if (messagesBuilder_ == null) {
+          if (!other.messages_.isEmpty()) {
+            if (messages_.isEmpty()) {
+              messages_ = other.messages_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureMessagesIsMutable();
+              messages_.addAll(other.messages_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.messages_.isEmpty()) {
+            if (messagesBuilder_.isEmpty()) {
+              messagesBuilder_.dispose();
+              messagesBuilder_ = null;
+              messages_ = other.messages_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              messagesBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getMessagesFieldBuilder() : null;
+            } else {
+              messagesBuilder_.addAllMessages(other.messages_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        for (int i = 0; i < getMessagesCount(); i++) {
+          if (!getMessages(i).isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        MessageContainer parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (MessageContainer) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<Message> messages_ =
+        java.util.Collections.emptyList();
+      private void ensureMessagesIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          messages_ = new java.util.ArrayList<Message>(messages_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          Message, Message.Builder, MessageOrBuilder> messagesBuilder_;
+
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public java.util.List<Message> getMessagesList() {
+        if (messagesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(messages_);
+        } else {
+          return messagesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public int getMessagesCount() {
+        if (messagesBuilder_ == null) {
+          return messages_.size();
+        } else {
+          return messagesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Message getMessages(int index) {
+        if (messagesBuilder_ == null) {
+          return messages_.get(index);
+        } else {
+          return messagesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder setMessages(
+          int index, Message value) {
+        if (messagesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMessagesIsMutable();
+          messages_.set(index, value);
+          onChanged();
+        } else {
+          messagesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder setMessages(
+          int index, Message.Builder builderForValue) {
+        if (messagesBuilder_ == null) {
+          ensureMessagesIsMutable();
+          messages_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          messagesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder addMessages(Message value) {
+        if (messagesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMessagesIsMutable();
+          messages_.add(value);
+          onChanged();
+        } else {
+          messagesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder addMessages(
+          int index, Message value) {
+        if (messagesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMessagesIsMutable();
+          messages_.add(index, value);
+          onChanged();
+        } else {
+          messagesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder addMessages(
+          Message.Builder builderForValue) {
+        if (messagesBuilder_ == null) {
+          ensureMessagesIsMutable();
+          messages_.add(builderForValue.build());
+          onChanged();
+        } else {
+          messagesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder addMessages(
+          int index, Message.Builder builderForValue) {
+        if (messagesBuilder_ == null) {
+          ensureMessagesIsMutable();
+          messages_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          messagesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder addAllMessages(
+          Iterable<? extends Message> values) {
+        if (messagesBuilder_ == null) {
+          ensureMessagesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, messages_);
+          onChanged();
+        } else {
+          messagesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder clearMessages() {
+        if (messagesBuilder_ == null) {
+          messages_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          messagesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Builder removeMessages(int index) {
+        if (messagesBuilder_ == null) {
+          ensureMessagesIsMutable();
+          messages_.remove(index);
+          onChanged();
+        } else {
+          messagesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Message.Builder getMessagesBuilder(
+          int index) {
+        return getMessagesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public MessageOrBuilder getMessagesOrBuilder(
+          int index) {
+        if (messagesBuilder_ == null) {
+          return messages_.get(index);  } else {
+          return messagesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public java.util.List<? extends MessageOrBuilder>
+           getMessagesOrBuilderList() {
+        if (messagesBuilder_ != null) {
+          return messagesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(messages_);
+        }
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Message.Builder addMessagesBuilder() {
+        return getMessagesFieldBuilder().addBuilder(
+            Message.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public Message.Builder addMessagesBuilder(
+          int index) {
+        return getMessagesFieldBuilder().addBuilder(
+            index, Message.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .message.Message messages = 1;</code>
+       */
+      public java.util.List<Message.Builder>
+           getMessagesBuilderList() {
+        return getMessagesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          Message, Message.Builder, MessageOrBuilder>
+          getMessagesFieldBuilder() {
+        if (messagesBuilder_ == null) {
+          messagesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              Message, Message.Builder, MessageOrBuilder>(
+                  messages_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          messages_ = null;
+        }
+        return messagesBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:message.MessageContainer)
+    }
+
+    // @@protoc_insertion_point(class_scope:message.MessageContainer)
+    private static final MessageContainer DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new MessageContainer();
+    }
+
+    public static MessageContainer getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @Deprecated public static final com.google.protobuf.Parser<MessageContainer>
+        PARSER = new com.google.protobuf.AbstractParser<MessageContainer>() {
+      public MessageContainer parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new MessageContainer(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<MessageContainer> parser() {
+      return PARSER;
+    }
+
+    @Override
+    public com.google.protobuf.Parser<MessageContainer> getParserForType() {
+      return PARSER;
+    }
+
+    public MessageContainer getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface VedioLikeMessageInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:message.VedioLikeMessageInfo)
       com.google.protobuf.MessageOrBuilder {
@@ -7245,6 +7999,11 @@ public final class MessageProtos {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_message_Message_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_message_MessageContainer_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_message_MessageContainer_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_message_VedioLikeMessageInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -7287,29 +8046,31 @@ public final class MessageProtos {
       "\n\004from\030\001 \002(\t\022\n\n\002to\030\002 \002(\t\022*\n\004type\030\003 \002(\0162\034" +
       ".message.Message.MessageType\022\014\n\004data\030\004 \001" +
       "(\014\"1\n\013MessageType\022\010\n\004CHAT\020\000\022\010\n\004LIKE\020\001\022\016\n" +
-      "\nWEALTH_ACK\020\002\"o\n\024VedioLikeMessageInfo\022\016\n" +
-      "\006likeID\030\001 \002(\t\022\020\n\010belikeID\030\002 \002(\t\022\014\n\004time\030" +
-      "\003 \002(\003\022\014\n\004icon\030\004 \001(\t\022\014\n\004name\030\005 \001(\t\022\013\n\003sex" +
-      "\030\006 \001(\t\"\217\002\n\013ChatMessage\022%\n\006status\030\001 \001(\0162\025" +
-      ".message.ChargeStatus\022\026\n\016receiverWealth\030" +
-      "\002 \001(\t\022\016\n\006tempID\030\003 \001(\t\022\013\n\003mid\030\004 \001(\003\022\014\n\004ti",
-      "me\030\006 \001(\003\022)\n\014relationType\030\007 \002(\0162\023.message" +
-      ".FriendType\022-\n\013messageType\030\010 \002(\0162\030.messa" +
-      "ge.ChatMessageType\022\017\n\007content\030\t \002(\014\022\016\n\006f" +
-      "romID\030\n \002(\t\022\014\n\004toID\030\013 \002(\t\022\r\n\005extra\030\014 \001(\014" +
-      "\"3\n\024AudioChatMessageInfo\022\016\n\006length\030\001 \002(\005" +
-      "\022\013\n\003url\030\002 \002(\t\"5\n\024ImageChatMessageInfo\022\020\n" +
-      "\010compress\030\001 \002(\014\022\013\n\003url\030\002 \002(\t\"#\n\023TextChat" +
-      "MessageInfo\022\014\n\004text\030\001 \002(\t\"\241\001\n\tWealthACK\022" +
-      "\016\n\006tempID\030\001 \002(\t\022\013\n\003mid\030\002 \002(\003\022\016\n\006wealth\030\003" +
-      " \002(\005\022)\n\014relationType\030\004 \002(\0162\023.message.Fri",
-      "endType\022%\n\006status\030\005 \002(\0162\025.message.Charge" +
-      "Status\022\025\n\rchargeSuccess\030\006 \002(\010*1\n\017ChatMes" +
-      "sageType\022\010\n\004TEXT\020\000\022\t\n\005AUDIO\020\001\022\t\n\005IMAGE\020\002" +
-      "*&\n\nFriendType\022\014\n\010STRANGER\020\000\022\n\n\006FRIEND\020\001" +
-      "*2\n\014ChargeStatus\022\t\n\005NOMAL\020\000\022\010\n\004FREE\020\001\022\r\n" +
-      "\tORVERFLOW\020\002B:\n)online.decentworld.rpc.d" +
-      "to.message.protosB\rMessageProtos"
+      "\nWEALTH_ACK\020\002\"6\n\020MessageContainer\022\"\n\010mes" +
+      "sages\030\001 \003(\0132\020.message.Message\"o\n\024VedioLi" +
+      "keMessageInfo\022\016\n\006likeID\030\001 \002(\t\022\020\n\010belikeI" +
+      "D\030\002 \002(\t\022\014\n\004time\030\003 \002(\003\022\014\n\004icon\030\004 \001(\t\022\014\n\004n" +
+      "ame\030\005 \001(\t\022\013\n\003sex\030\006 \001(\t\"\217\002\n\013ChatMessage\022%" +
+      "\n\006status\030\001 \001(\0162\025.message.ChargeStatus\022\026\n",
+      "\016receiverWealth\030\002 \001(\t\022\016\n\006tempID\030\003 \001(\t\022\013\n" +
+      "\003mid\030\004 \001(\003\022\014\n\004time\030\006 \001(\003\022)\n\014relationType" +
+      "\030\007 \002(\0162\023.message.FriendType\022-\n\013messageTy" +
+      "pe\030\010 \002(\0162\030.message.ChatMessageType\022\017\n\007co" +
+      "ntent\030\t \002(\014\022\016\n\006fromID\030\n \002(\t\022\014\n\004toID\030\013 \002(" +
+      "\t\022\r\n\005extra\030\014 \001(\014\"3\n\024AudioChatMessageInfo" +
+      "\022\016\n\006length\030\001 \002(\005\022\013\n\003url\030\002 \002(\t\"5\n\024ImageCh" +
+      "atMessageInfo\022\020\n\010compress\030\001 \002(\014\022\013\n\003url\030\002" +
+      " \002(\t\"#\n\023TextChatMessageInfo\022\014\n\004text\030\001 \002(" +
+      "\t\"\241\001\n\tWealthACK\022\016\n\006tempID\030\001 \002(\t\022\013\n\003mid\030\002",
+      " \002(\003\022\016\n\006wealth\030\003 \002(\005\022)\n\014relationType\030\004 \002" +
+      "(\0162\023.message.FriendType\022%\n\006status\030\005 \002(\0162" +
+      "\025.message.ChargeStatus\022\025\n\rchargeSuccess\030" +
+      "\006 \002(\010*1\n\017ChatMessageType\022\010\n\004TEXT\020\000\022\t\n\005AU" +
+      "DIO\020\001\022\t\n\005IMAGE\020\002*&\n\nFriendType\022\014\n\010STRANG" +
+      "ER\020\000\022\n\n\006FRIEND\020\001*2\n\014ChargeStatus\022\t\n\005NOMA" +
+      "L\020\000\022\010\n\004FREE\020\001\022\r\n\tORVERFLOW\020\002B:\n)online.d" +
+      "ecentworld.rpc.dto.message.protosB\rMessa" +
+      "geProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7329,38 +8090,44 @@ public final class MessageProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Message_descriptor,
         new String[] { "From", "To", "Type", "Data", });
-    internal_static_message_VedioLikeMessageInfo_descriptor =
+    internal_static_message_MessageContainer_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_message_MessageContainer_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_message_MessageContainer_descriptor,
+        new String[] { "Messages", });
+    internal_static_message_VedioLikeMessageInfo_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_message_VedioLikeMessageInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_VedioLikeMessageInfo_descriptor,
         new String[] { "LikeID", "BelikeID", "Time", "Icon", "Name", "Sex", });
     internal_static_message_ChatMessage_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_message_ChatMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_ChatMessage_descriptor,
         new String[] { "Status", "ReceiverWealth", "TempID", "Mid", "Time", "RelationType", "MessageType", "Content", "FromID", "ToID", "Extra", });
     internal_static_message_AudioChatMessageInfo_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_message_AudioChatMessageInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_AudioChatMessageInfo_descriptor,
         new String[] { "Length", "Url", });
     internal_static_message_ImageChatMessageInfo_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_message_ImageChatMessageInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_ImageChatMessageInfo_descriptor,
         new String[] { "Compress", "Url", });
     internal_static_message_TextChatMessageInfo_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_message_TextChatMessageInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_TextChatMessageInfo_descriptor,
         new String[] { "Text", });
     internal_static_message_WealthACK_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_message_WealthACK_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_WealthACK_descriptor,
