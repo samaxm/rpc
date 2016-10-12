@@ -28,8 +28,8 @@ public class ImageChatMessage extends ChatMessage {
     }
 
 
-    public ImageChatMessage(ChatStatus status, String receiverWealth, String tempID, long mid,long time, ChatRelation relation, ChatMessageType type, String fromID, String toID, byte[] compress, String url) {
-        super(status, receiverWealth, tempID, mid, time, relation, type, fromID, toID);
+    public ImageChatMessage(ChatStatus status, String receiverWealth, String tempID,ChatRelation relation, ChatMessageType type, String fromID, String toID, byte[] compress, String url) {
+        super(status, receiverWealth, tempID, relation, type, fromID, toID);
         this.compress = compress;
         this.url = url;
     }

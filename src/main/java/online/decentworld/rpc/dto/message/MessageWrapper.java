@@ -2,6 +2,8 @@ package online.decentworld.rpc.dto.message;
 
 import online.decentworld.rpc.dto.message.types.MessageType;
 
+import java.util.Date;
+
 public class MessageWrapper {
 
 	private String sender;
@@ -12,20 +14,22 @@ public class MessageWrapper {
 
 	private MessageBody body;
 
-	public MessageWrapper(String sender, String receiver, MessageType type, MessageBody body) {
+	private Date time;
+
+	private long mid;
+
+	public MessageWrapper(String sender, String receiver, MessageType type, MessageBody body, Date time, long mid) {
 		this.sender = sender;
 		this.receiver = receiver;
 		this.type = type;
 		this.body = body;
+		this.time = time;
+		this.mid = mid;
 	}
 
-	public static MessageWrapper  wrapChatMessage(ChatMessage msg){
-		return new MessageWrapper(msg.getFromID(),msg.getToID(),MessageType.CHAT,msg);
-	}
 
-	public MessageWrapper() {
+	public MessageWrapper(){}
 
-	}
 
 	public String getSender() {
 		return sender;
@@ -57,5 +61,21 @@ public class MessageWrapper {
 
 	public void setBody(MessageBody body) {
 		this.body = body;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public long getMid() {
+		return mid;
+	}
+
+	public void setMid(long mid) {
+		this.mid = mid;
 	}
 }

@@ -19,8 +19,8 @@ public final class TextChatMessage extends ChatMessage {
         this.text = text;
     }
 
-    public TextChatMessage(ChatStatus status, String receiverWealth, String tempID, long mid, long time, ChatRelation relation, ChatMessageType type, String fromID, String toID, String text) {
-        super(status, receiverWealth, tempID, mid, time, relation, type, fromID, toID);
+    public TextChatMessage(ChatStatus status, String receiverWealth, String tempID, ChatRelation relation, ChatMessageType type, String fromID, String toID, String text) {
+        super(status, receiverWealth, tempID,relation, type, fromID, toID);
         this.text = text;
     }
 

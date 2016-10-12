@@ -21,17 +21,17 @@ public class ChatMessageConverter extends ProcosMessageWrapper {
         switch (type){
             case TEXT:
                 MessageProtos.TextChatMessageInfo text=MessageProtos.TextChatMessageInfo.parseFrom(cm.getContent());
-                chatMessage=new TextChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(),cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
+                chatMessage=new TextChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),ChatRelation.getChatRelation(cm.getRelationType().getNumber())
                     , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),cm.getFromID(),cm.getToID(),text.getText());
                 break;
             case AUDIO:
                 MessageProtos.AudioChatMessageInfo audio=MessageProtos.AudioChatMessageInfo.parseFrom(cm.getContent());
-                chatMessage=new AudioChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(), cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
+                chatMessage=new AudioChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
                         , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),cm.getFromID(),cm.getToID(),audio.getLength(),audio.getUrl());
                 break;
             case IMAGE:
                 MessageProtos.ImageChatMessageInfo image=MessageProtos.ImageChatMessageInfo.parseFrom(cm.getContent());
-                chatMessage=new ImageChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),cm.getMid(),cm.getTime(), ChatRelation.getChatRelation(cm.getRelationType().getNumber())
+                chatMessage=new ImageChatMessage(ChatStatus.getChatStatus(cm.getStatus().getNumber()),cm.getReceiverWealth(),cm.getTempID(),ChatRelation.getChatRelation(cm.getRelationType().getNumber())
                         , ChatMessageType.getChatMessageType(cm.getMessageType().getNumber()),cm.getFromID(),cm.getToID(),image.getCompress().toByteArray(),image.getUrl());
                 break;
 
@@ -58,8 +58,8 @@ public class ChatMessageConverter extends ProcosMessageWrapper {
                         .build().toByteString();
                 break;
         }
-        return MessageProtos.ChatMessage.newBuilder().setTime(cm.getTime()).setContent(info)
-                .setMessageType(MessageProtos.ChatMessageType.forNumber(cm.getType().getCode())).setMid(cm.getMid())
+        return MessageProtos.ChatMessage.newBuilder().setContent(info)
+                .setMessageType(MessageProtos.ChatMessageType.forNumber(cm.getType().getCode()))
                 .setReceiverWealth(cm.getReceiverWealth()).setRelationType(MessageProtos.FriendType.forNumber(cm.getRelation().getCode()))
                 .setStatus(MessageProtos.ChargeStatus.forNumber(cm.getStatus().getCode())).setTempID(cm.getTempID())
                 .setFromID(cm.getFromID()).setToID(cm.getToID())

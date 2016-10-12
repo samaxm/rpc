@@ -2,8 +2,6 @@ package online.decentworld.rpc.dto.message;
 
 import online.decentworld.rpc.dto.message.types.MessageType;
 
-import java.util.Date;
-
 public final class LikeMessageBody implements MessageBody {
 
 	private final String icon;
@@ -11,18 +9,16 @@ public final class LikeMessageBody implements MessageBody {
 	private final String likeID;
 	private final String beLikedID;
 	private final String sex;
-	private final Date time ;
-	
+
 	
 	public LikeMessageBody(String icon, String name, String likeID,
-						   String beLikedID, String sex, Date time) {
+						   String beLikedID, String sex) {
 		super();
 		this.icon = icon;
 		this.name = name;
 		this.likeID = likeID;
 		this.beLikedID = beLikedID;
 		this.sex = sex;
-		this.time = time;
 	}
 	public String getIcon() {
 		return icon;
@@ -38,9 +34,6 @@ public final class LikeMessageBody implements MessageBody {
 	}
 	public String getSex() {
 		return sex;
-	}
-	public Date getTime() {
-		return time;
 	}
 
 

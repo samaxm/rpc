@@ -344,11 +344,29 @@ public final class MessageProtos {
     Message.MessageType getType();
 
     /**
-     * <code>optional bytes data = 4;</code>
+     * <code>required int64 mid = 4;</code>
+     */
+    boolean hasMid();
+    /**
+     * <code>required int64 mid = 4;</code>
+     */
+    long getMid();
+
+    /**
+     * <code>required int64 time = 5;</code>
+     */
+    boolean hasTime();
+    /**
+     * <code>required int64 time = 5;</code>
+     */
+    long getTime();
+
+    /**
+     * <code>optional bytes data = 6;</code>
      */
     boolean hasData();
     /**
-     * <code>optional bytes data = 4;</code>
+     * <code>optional bytes data = 6;</code>
      */
     com.google.protobuf.ByteString getData();
   }
@@ -367,6 +385,8 @@ public final class MessageProtos {
       from_ = "";
       to_ = "";
       type_ = 0;
+      mid_ = 0L;
+      time_ = 0L;
       data_ = com.google.protobuf.ByteString.EMPTY;
     }
 
@@ -421,8 +441,18 @@ public final class MessageProtos {
               }
               break;
             }
-            case 34: {
+            case 32: {
               bitField0_ |= 0x00000008;
+              mid_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              time_ = input.readInt64();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
               data_ = input.readBytes();
               break;
             }
@@ -467,6 +497,10 @@ public final class MessageProtos {
        * <code>WEALTH_ACK = 2;</code>
        */
       WEALTH_ACK(2),
+      /**
+       * <code>LIST = 3;</code>
+       */
+      LIST(3),
       ;
 
       /**
@@ -481,6 +515,10 @@ public final class MessageProtos {
        * <code>WEALTH_ACK = 2;</code>
        */
       public static final int WEALTH_ACK_VALUE = 2;
+      /**
+       * <code>LIST = 3;</code>
+       */
+      public static final int LIST_VALUE = 3;
 
 
       public final int getNumber() {
@@ -500,6 +538,7 @@ public final class MessageProtos {
           case 0: return CHAT;
           case 1: return LIKE;
           case 2: return WEALTH_ACK;
+          case 3: return LIST;
           default: return null;
         }
       }
@@ -650,16 +689,46 @@ public final class MessageProtos {
       return result == null ? MessageType.CHAT : result;
     }
 
-    public static final int DATA_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString data_;
+    public static final int MID_FIELD_NUMBER = 4;
+    private long mid_;
     /**
-     * <code>optional bytes data = 4;</code>
+     * <code>required int64 mid = 4;</code>
      */
-    public boolean hasData() {
+    public boolean hasMid() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional bytes data = 4;</code>
+     * <code>required int64 mid = 4;</code>
+     */
+    public long getMid() {
+      return mid_;
+    }
+
+    public static final int TIME_FIELD_NUMBER = 5;
+    private long time_;
+    /**
+     * <code>required int64 time = 5;</code>
+     */
+    public boolean hasTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required int64 time = 5;</code>
+     */
+    public long getTime() {
+      return time_;
+    }
+
+    public static final int DATA_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString data_;
+    /**
+     * <code>optional bytes data = 6;</code>
+     */
+    public boolean hasData() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bytes data = 6;</code>
      */
     public com.google.protobuf.ByteString getData() {
       return data_;
@@ -683,6 +752,14 @@ public final class MessageProtos {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasMid()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -699,7 +776,13 @@ public final class MessageProtos {
         output.writeEnum(3, type_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, data_);
+        output.writeInt64(4, mid_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, time_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, data_);
       }
       unknownFields.writeTo(output);
     }
@@ -721,7 +804,15 @@ public final class MessageProtos {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, data_);
+          .computeInt64Size(4, mid_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, time_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, data_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -754,6 +845,16 @@ public final class MessageProtos {
       if (hasType()) {
         result = result && type_ == other.type_;
       }
+      result = result && (hasMid() == other.hasMid());
+      if (hasMid()) {
+        result = result && (getMid()
+            == other.getMid());
+      }
+      result = result && (hasTime() == other.hasTime());
+      if (hasTime()) {
+        result = result && (getTime()
+            == other.getTime());
+      }
       result = result && (hasData() == other.hasData());
       if (hasData()) {
         result = result && getData()
@@ -781,6 +882,16 @@ public final class MessageProtos {
       if (hasType()) {
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + type_;
+      }
+      if (hasMid()) {
+        hash = (37 * hash) + MID_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getMid());
+      }
+      if (hasTime()) {
+        hash = (37 * hash) + TIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getTime());
       }
       if (hasData()) {
         hash = (37 * hash) + DATA_FIELD_NUMBER;
@@ -910,8 +1021,12 @@ public final class MessageProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        data_ = com.google.protobuf.ByteString.EMPTY;
+        mid_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        time_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -950,6 +1065,14 @@ public final class MessageProtos {
         result.type_ = type_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
+        }
+        result.mid_ = mid_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.time_ = time_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.data_ = data_;
         result.bitField0_ = to_bitField0_;
@@ -1007,6 +1130,12 @@ public final class MessageProtos {
         if (other.hasType()) {
           setType(other.getType());
         }
+        if (other.hasMid()) {
+          setMid(other.getMid());
+        }
+        if (other.hasTime()) {
+          setTime(other.getTime());
+        }
         if (other.hasData()) {
           setData(other.getData());
         }
@@ -1023,6 +1152,12 @@ public final class MessageProtos {
           return false;
         }
         if (!hasType()) {
+          return false;
+        }
+        if (!hasMid()) {
+          return false;
+        }
+        if (!hasTime()) {
           return false;
         }
         return true;
@@ -1235,36 +1370,100 @@ public final class MessageProtos {
         return this;
       }
 
-      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      private long mid_ ;
       /**
-       * <code>optional bytes data = 4;</code>
+       * <code>required int64 mid = 4;</code>
        */
-      public boolean hasData() {
+      public boolean hasMid() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional bytes data = 4;</code>
+       * <code>required int64 mid = 4;</code>
+       */
+      public long getMid() {
+        return mid_;
+      }
+      /**
+       * <code>required int64 mid = 4;</code>
+       */
+      public Builder setMid(long value) {
+        bitField0_ |= 0x00000008;
+        mid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 mid = 4;</code>
+       */
+      public Builder clearMid() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        mid_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long time_ ;
+      /**
+       * <code>required int64 time = 5;</code>
+       */
+      public boolean hasTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required int64 time = 5;</code>
+       */
+      public long getTime() {
+        return time_;
+      }
+      /**
+       * <code>required int64 time = 5;</code>
+       */
+      public Builder setTime(long value) {
+        bitField0_ |= 0x00000010;
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 time = 5;</code>
+       */
+      public Builder clearTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        time_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes data = 6;</code>
+       */
+      public boolean hasData() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bytes data = 6;</code>
        */
       public com.google.protobuf.ByteString getData() {
         return data_;
       }
       /**
-       * <code>optional bytes data = 4;</code>
+       * <code>optional bytes data = 6;</code>
        */
       public Builder setData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000020;
         data_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bytes data = 4;</code>
+       * <code>optional bytes data = 6;</code>
        */
       public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000020);
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
@@ -2105,15 +2304,6 @@ public final class MessageProtos {
         getBelikeIDBytes();
 
     /**
-     * <code>required int64 time = 3;</code>
-     */
-    boolean hasTime();
-    /**
-     * <code>required int64 time = 3;</code>
-     */
-    long getTime();
-
-    /**
      * <code>optional string icon = 4;</code>
      */
     boolean hasIcon();
@@ -2169,7 +2359,6 @@ public final class MessageProtos {
     private VedioLikeMessageInfo() {
       likeID_ = "";
       belikeID_ = "";
-      time_ = 0L;
       icon_ = "";
       name_ = "";
       sex_ = "";
@@ -2215,26 +2404,21 @@ public final class MessageProtos {
               belikeID_ = bs;
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              time_ = input.readInt64();
-              break;
-            }
             case 34: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               icon_ = bs;
               break;
             }
             case 42: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               name_ = bs;
               break;
             }
             case 50: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000010;
               sex_ = bs;
               break;
             }
@@ -2347,28 +2531,13 @@ public final class MessageProtos {
       }
     }
 
-    public static final int TIME_FIELD_NUMBER = 3;
-    private long time_;
-    /**
-     * <code>required int64 time = 3;</code>
-     */
-    public boolean hasTime() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required int64 time = 3;</code>
-     */
-    public long getTime() {
-      return time_;
-    }
-
     public static final int ICON_FIELD_NUMBER = 4;
     private volatile Object icon_;
     /**
      * <code>optional string icon = 4;</code>
      */
     public boolean hasIcon() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional string icon = 4;</code>
@@ -2410,7 +2579,7 @@ public final class MessageProtos {
      * <code>optional string name = 5;</code>
      */
     public boolean hasName() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional string name = 5;</code>
@@ -2452,7 +2621,7 @@ public final class MessageProtos {
      * <code>optional string sex = 6;</code>
      */
     public boolean hasSex() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional string sex = 6;</code>
@@ -2502,10 +2671,6 @@ public final class MessageProtos {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasTime()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -2519,15 +2684,12 @@ public final class MessageProtos {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, belikeID_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, time_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, icon_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, name_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, sex_);
       }
       unknownFields.writeTo(output);
@@ -2545,16 +2707,12 @@ public final class MessageProtos {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, belikeID_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, time_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, icon_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, name_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, sex_);
       }
       size += unknownFields.getSerializedSize();
@@ -2583,11 +2741,6 @@ public final class MessageProtos {
       if (hasBelikeID()) {
         result = result && getBelikeID()
             .equals(other.getBelikeID());
-      }
-      result = result && (hasTime() == other.hasTime());
-      if (hasTime()) {
-        result = result && (getTime()
-            == other.getTime());
       }
       result = result && (hasIcon() == other.hasIcon());
       if (hasIcon()) {
@@ -2622,11 +2775,6 @@ public final class MessageProtos {
       if (hasBelikeID()) {
         hash = (37 * hash) + BELIKEID_FIELD_NUMBER;
         hash = (53 * hash) + getBelikeID().hashCode();
-      }
-      if (hasTime()) {
-        hash = (37 * hash) + TIME_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getTime());
       }
       if (hasIcon()) {
         hash = (37 * hash) + ICON_FIELD_NUMBER;
@@ -2762,14 +2910,12 @@ public final class MessageProtos {
         bitField0_ = (bitField0_ & ~0x00000001);
         belikeID_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        time_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000004);
         icon_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         sex_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -2805,17 +2951,13 @@ public final class MessageProtos {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.time_ = time_;
+        result.icon_ = icon_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.icon_ = icon_;
+        result.name_ = name_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
-        }
-        result.name_ = name_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
         }
         result.sex_ = sex_;
         result.bitField0_ = to_bitField0_;
@@ -2870,21 +3012,18 @@ public final class MessageProtos {
           belikeID_ = other.belikeID_;
           onChanged();
         }
-        if (other.hasTime()) {
-          setTime(other.getTime());
-        }
         if (other.hasIcon()) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
           icon_ = other.icon_;
           onChanged();
         }
         if (other.hasName()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
           name_ = other.name_;
           onChanged();
         }
         if (other.hasSex()) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000010;
           sex_ = other.sex_;
           onChanged();
         }
@@ -2898,9 +3037,6 @@ public final class MessageProtos {
           return false;
         }
         if (!hasBelikeID()) {
-          return false;
-        }
-        if (!hasTime()) {
           return false;
         }
         return true;
@@ -3077,44 +3213,12 @@ public final class MessageProtos {
         return this;
       }
 
-      private long time_ ;
-      /**
-       * <code>required int64 time = 3;</code>
-       */
-      public boolean hasTime() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required int64 time = 3;</code>
-       */
-      public long getTime() {
-        return time_;
-      }
-      /**
-       * <code>required int64 time = 3;</code>
-       */
-      public Builder setTime(long value) {
-        bitField0_ |= 0x00000004;
-        time_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 time = 3;</code>
-       */
-      public Builder clearTime() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        time_ = 0L;
-        onChanged();
-        return this;
-      }
-
       private Object icon_ = "";
       /**
        * <code>optional string icon = 4;</code>
        */
       public boolean hasIcon() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional string icon = 4;</code>
@@ -3157,7 +3261,7 @@ public final class MessageProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         icon_ = value;
         onChanged();
         return this;
@@ -3166,7 +3270,7 @@ public final class MessageProtos {
        * <code>optional string icon = 4;</code>
        */
       public Builder clearIcon() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         icon_ = getDefaultInstance().getIcon();
         onChanged();
         return this;
@@ -3179,7 +3283,7 @@ public final class MessageProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         icon_ = value;
         onChanged();
         return this;
@@ -3190,7 +3294,7 @@ public final class MessageProtos {
        * <code>optional string name = 5;</code>
        */
       public boolean hasName() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional string name = 5;</code>
@@ -3233,7 +3337,7 @@ public final class MessageProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         name_ = value;
         onChanged();
         return this;
@@ -3242,7 +3346,7 @@ public final class MessageProtos {
        * <code>optional string name = 5;</code>
        */
       public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         name_ = getDefaultInstance().getName();
         onChanged();
         return this;
@@ -3255,7 +3359,7 @@ public final class MessageProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         name_ = value;
         onChanged();
         return this;
@@ -3266,7 +3370,7 @@ public final class MessageProtos {
        * <code>optional string sex = 6;</code>
        */
       public boolean hasSex() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional string sex = 6;</code>
@@ -3309,7 +3413,7 @@ public final class MessageProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000010;
         sex_ = value;
         onChanged();
         return this;
@@ -3318,7 +3422,7 @@ public final class MessageProtos {
        * <code>optional string sex = 6;</code>
        */
       public Builder clearSex() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         sex_ = getDefaultInstance().getSex();
         onChanged();
         return this;
@@ -3331,7 +3435,7 @@ public final class MessageProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000010;
         sex_ = value;
         onChanged();
         return this;
@@ -3427,84 +3531,66 @@ public final class MessageProtos {
         getTempIDBytes();
 
     /**
-     * <code>optional int64 mid = 4;</code>
-     */
-    boolean hasMid();
-    /**
-     * <code>optional int64 mid = 4;</code>
-     */
-    long getMid();
-
-    /**
-     * <code>optional int64 time = 6;</code>
-     */
-    boolean hasTime();
-    /**
-     * <code>optional int64 time = 6;</code>
-     */
-    long getTime();
-
-    /**
-     * <code>required .message.FriendType relationType = 7;</code>
+     * <code>required .message.FriendType relationType = 4;</code>
      */
     boolean hasRelationType();
     /**
-     * <code>required .message.FriendType relationType = 7;</code>
+     * <code>required .message.FriendType relationType = 4;</code>
      */
     FriendType getRelationType();
 
     /**
-     * <code>required .message.ChatMessageType messageType = 8;</code>
+     * <code>required .message.ChatMessageType messageType = 5;</code>
      */
     boolean hasMessageType();
     /**
-     * <code>required .message.ChatMessageType messageType = 8;</code>
+     * <code>required .message.ChatMessageType messageType = 5;</code>
      */
     ChatMessageType getMessageType();
 
     /**
-     * <code>required bytes content = 9;</code>
+     * <code>required bytes content = 6;</code>
      */
     boolean hasContent();
     /**
-     * <code>required bytes content = 9;</code>
+     * <code>required bytes content = 6;</code>
      */
     com.google.protobuf.ByteString getContent();
 
     /**
-     * <code>required string fromID = 10;</code>
+     * <code>required string fromID = 7;</code>
      */
     boolean hasFromID();
     /**
-     * <code>required string fromID = 10;</code>
+     * <code>required string fromID = 7;</code>
      */
     String getFromID();
     /**
-     * <code>required string fromID = 10;</code>
+     * <code>required string fromID = 7;</code>
      */
     com.google.protobuf.ByteString
         getFromIDBytes();
 
     /**
-     * <code>required string toID = 11;</code>
+     * <code>required string toID = 8;</code>
      */
     boolean hasToID();
     /**
-     * <code>required string toID = 11;</code>
+     * <code>required string toID = 8;</code>
      */
     String getToID();
     /**
-     * <code>required string toID = 11;</code>
+     * <code>required string toID = 8;</code>
      */
     com.google.protobuf.ByteString
         getToIDBytes();
 
     /**
-     * <code>optional bytes extra = 12;</code>
+     * <code>optional bytes extra = 9;</code>
      */
     boolean hasExtra();
     /**
-     * <code>optional bytes extra = 12;</code>
+     * <code>optional bytes extra = 9;</code>
      */
     com.google.protobuf.ByteString getExtra();
   }
@@ -3523,8 +3609,6 @@ public final class MessageProtos {
       status_ = 0;
       receiverWealth_ = "";
       tempID_ = "";
-      mid_ = 0L;
-      time_ = 0L;
       relationType_ = 0;
       messageType_ = 0;
       content_ = com.google.protobuf.ByteString.EMPTY;
@@ -3585,56 +3669,46 @@ public final class MessageProtos {
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000008;
-              mid_ = input.readInt64();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000010;
-              time_ = input.readInt64();
-              break;
-            }
-            case 56: {
               int rawValue = input.readEnum();
               FriendType value = FriendType.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(7, rawValue);
+                unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000020;
+                bitField0_ |= 0x00000008;
                 relationType_ = rawValue;
               }
               break;
             }
-            case 64: {
+            case 40: {
               int rawValue = input.readEnum();
               ChatMessageType value = ChatMessageType.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(8, rawValue);
+                unknownFields.mergeVarintField(5, rawValue);
               } else {
-                bitField0_ |= 0x00000040;
+                bitField0_ |= 0x00000010;
                 messageType_ = rawValue;
               }
               break;
             }
-            case 74: {
-              bitField0_ |= 0x00000080;
+            case 50: {
+              bitField0_ |= 0x00000020;
               content_ = input.readBytes();
               break;
             }
-            case 82: {
+            case 58: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000040;
               fromID_ = bs;
               break;
             }
-            case 90: {
+            case 66: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000080;
               toID_ = bs;
               break;
             }
-            case 98: {
-              bitField0_ |= 0x00000400;
+            case 74: {
+              bitField0_ |= 0x00000100;
               extra_ = input.readBytes();
               break;
             }
@@ -3763,93 +3837,63 @@ public final class MessageProtos {
       }
     }
 
-    public static final int MID_FIELD_NUMBER = 4;
-    private long mid_;
+    public static final int RELATIONTYPE_FIELD_NUMBER = 4;
+    private int relationType_;
     /**
-     * <code>optional int64 mid = 4;</code>
+     * <code>required .message.FriendType relationType = 4;</code>
      */
-    public boolean hasMid() {
+    public boolean hasRelationType() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int64 mid = 4;</code>
-     */
-    public long getMid() {
-      return mid_;
-    }
-
-    public static final int TIME_FIELD_NUMBER = 6;
-    private long time_;
-    /**
-     * <code>optional int64 time = 6;</code>
-     */
-    public boolean hasTime() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int64 time = 6;</code>
-     */
-    public long getTime() {
-      return time_;
-    }
-
-    public static final int RELATIONTYPE_FIELD_NUMBER = 7;
-    private int relationType_;
-    /**
-     * <code>required .message.FriendType relationType = 7;</code>
-     */
-    public boolean hasRelationType() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>required .message.FriendType relationType = 7;</code>
+     * <code>required .message.FriendType relationType = 4;</code>
      */
     public FriendType getRelationType() {
       FriendType result = FriendType.valueOf(relationType_);
       return result == null ? FriendType.STRANGER : result;
     }
 
-    public static final int MESSAGETYPE_FIELD_NUMBER = 8;
+    public static final int MESSAGETYPE_FIELD_NUMBER = 5;
     private int messageType_;
     /**
-     * <code>required .message.ChatMessageType messageType = 8;</code>
+     * <code>required .message.ChatMessageType messageType = 5;</code>
      */
     public boolean hasMessageType() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required .message.ChatMessageType messageType = 8;</code>
+     * <code>required .message.ChatMessageType messageType = 5;</code>
      */
     public ChatMessageType getMessageType() {
       ChatMessageType result = ChatMessageType.valueOf(messageType_);
       return result == null ? ChatMessageType.TEXT : result;
     }
 
-    public static final int CONTENT_FIELD_NUMBER = 9;
+    public static final int CONTENT_FIELD_NUMBER = 6;
     private com.google.protobuf.ByteString content_;
     /**
-     * <code>required bytes content = 9;</code>
+     * <code>required bytes content = 6;</code>
      */
     public boolean hasContent() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required bytes content = 9;</code>
+     * <code>required bytes content = 6;</code>
      */
     public com.google.protobuf.ByteString getContent() {
       return content_;
     }
 
-    public static final int FROMID_FIELD_NUMBER = 10;
+    public static final int FROMID_FIELD_NUMBER = 7;
     private volatile Object fromID_;
     /**
-     * <code>required string fromID = 10;</code>
+     * <code>required string fromID = 7;</code>
      */
     public boolean hasFromID() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>required string fromID = 10;</code>
+     * <code>required string fromID = 7;</code>
      */
     public String getFromID() {
       Object ref = fromID_;
@@ -3866,7 +3910,7 @@ public final class MessageProtos {
       }
     }
     /**
-     * <code>required string fromID = 10;</code>
+     * <code>required string fromID = 7;</code>
      */
     public com.google.protobuf.ByteString
         getFromIDBytes() {
@@ -3882,16 +3926,16 @@ public final class MessageProtos {
       }
     }
 
-    public static final int TOID_FIELD_NUMBER = 11;
+    public static final int TOID_FIELD_NUMBER = 8;
     private volatile Object toID_;
     /**
-     * <code>required string toID = 11;</code>
+     * <code>required string toID = 8;</code>
      */
     public boolean hasToID() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>required string toID = 11;</code>
+     * <code>required string toID = 8;</code>
      */
     public String getToID() {
       Object ref = toID_;
@@ -3908,7 +3952,7 @@ public final class MessageProtos {
       }
     }
     /**
-     * <code>required string toID = 11;</code>
+     * <code>required string toID = 8;</code>
      */
     public com.google.protobuf.ByteString
         getToIDBytes() {
@@ -3924,16 +3968,16 @@ public final class MessageProtos {
       }
     }
 
-    public static final int EXTRA_FIELD_NUMBER = 12;
+    public static final int EXTRA_FIELD_NUMBER = 9;
     private com.google.protobuf.ByteString extra_;
     /**
-     * <code>optional bytes extra = 12;</code>
+     * <code>optional bytes extra = 9;</code>
      */
     public boolean hasExtra() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional bytes extra = 12;</code>
+     * <code>optional bytes extra = 9;</code>
      */
     public com.google.protobuf.ByteString getExtra() {
       return extra_;
@@ -3981,28 +4025,22 @@ public final class MessageProtos {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, tempID_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(4, mid_);
+        output.writeEnum(4, relationType_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(6, time_);
+        output.writeEnum(5, messageType_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeEnum(7, relationType_);
+        output.writeBytes(6, content_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeEnum(8, messageType_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, fromID_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(9, content_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, toID_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, fromID_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, toID_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBytes(12, extra_);
+        output.writeBytes(9, extra_);
       }
       unknownFields.writeTo(output);
     }
@@ -4024,33 +4062,25 @@ public final class MessageProtos {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, mid_);
+          .computeEnumSize(4, relationType_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, time_);
+          .computeEnumSize(5, messageType_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, relationType_);
+          .computeBytesSize(6, content_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(8, messageType_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, fromID_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, content_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, toID_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, fromID_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, toID_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, extra_);
+          .computeBytesSize(9, extra_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4082,16 +4112,6 @@ public final class MessageProtos {
       if (hasTempID()) {
         result = result && getTempID()
             .equals(other.getTempID());
-      }
-      result = result && (hasMid() == other.hasMid());
-      if (hasMid()) {
-        result = result && (getMid()
-            == other.getMid());
-      }
-      result = result && (hasTime() == other.hasTime());
-      if (hasTime()) {
-        result = result && (getTime()
-            == other.getTime());
       }
       result = result && (hasRelationType() == other.hasRelationType());
       if (hasRelationType()) {
@@ -4143,16 +4163,6 @@ public final class MessageProtos {
       if (hasTempID()) {
         hash = (37 * hash) + TEMPID_FIELD_NUMBER;
         hash = (53 * hash) + getTempID().hashCode();
-      }
-      if (hasMid()) {
-        hash = (37 * hash) + MID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getMid());
-      }
-      if (hasTime()) {
-        hash = (37 * hash) + TIME_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getTime());
       }
       if (hasRelationType()) {
         hash = (37 * hash) + RELATIONTYPE_FIELD_NUMBER;
@@ -4302,22 +4312,18 @@ public final class MessageProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         tempID_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        mid_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        time_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
         relationType_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000008);
         messageType_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         content_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         fromID_ = "";
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         toID_ = "";
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000080);
         extra_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -4357,33 +4363,25 @@ public final class MessageProtos {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.mid_ = mid_;
+        result.relationType_ = relationType_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.time_ = time_;
+        result.messageType_ = messageType_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.relationType_ = relationType_;
+        result.content_ = content_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.messageType_ = messageType_;
+        result.fromID_ = fromID_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.content_ = content_;
+        result.toID_ = toID_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
-        }
-        result.fromID_ = fromID_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.toID_ = toID_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
         }
         result.extra_ = extra_;
         result.bitField0_ = to_bitField0_;
@@ -4441,12 +4439,6 @@ public final class MessageProtos {
           tempID_ = other.tempID_;
           onChanged();
         }
-        if (other.hasMid()) {
-          setMid(other.getMid());
-        }
-        if (other.hasTime()) {
-          setTime(other.getTime());
-        }
         if (other.hasRelationType()) {
           setRelationType(other.getRelationType());
         }
@@ -4457,12 +4449,12 @@ public final class MessageProtos {
           setContent(other.getContent());
         }
         if (other.hasFromID()) {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000040;
           fromID_ = other.fromID_;
           onChanged();
         }
         if (other.hasToID()) {
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000080;
           toID_ = other.toID_;
           onChanged();
         }
@@ -4700,101 +4692,37 @@ public final class MessageProtos {
         return this;
       }
 
-      private long mid_ ;
+      private int relationType_ = 0;
       /**
-       * <code>optional int64 mid = 4;</code>
+       * <code>required .message.FriendType relationType = 4;</code>
        */
-      public boolean hasMid() {
+      public boolean hasRelationType() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int64 mid = 4;</code>
-       */
-      public long getMid() {
-        return mid_;
-      }
-      /**
-       * <code>optional int64 mid = 4;</code>
-       */
-      public Builder setMid(long value) {
-        bitField0_ |= 0x00000008;
-        mid_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 mid = 4;</code>
-       */
-      public Builder clearMid() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        mid_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long time_ ;
-      /**
-       * <code>optional int64 time = 6;</code>
-       */
-      public boolean hasTime() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <code>optional int64 time = 6;</code>
-       */
-      public long getTime() {
-        return time_;
-      }
-      /**
-       * <code>optional int64 time = 6;</code>
-       */
-      public Builder setTime(long value) {
-        bitField0_ |= 0x00000010;
-        time_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 time = 6;</code>
-       */
-      public Builder clearTime() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        time_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private int relationType_ = 0;
-      /**
-       * <code>required .message.FriendType relationType = 7;</code>
-       */
-      public boolean hasRelationType() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>required .message.FriendType relationType = 7;</code>
+       * <code>required .message.FriendType relationType = 4;</code>
        */
       public FriendType getRelationType() {
         FriendType result = FriendType.valueOf(relationType_);
         return result == null ? FriendType.STRANGER : result;
       }
       /**
-       * <code>required .message.FriendType relationType = 7;</code>
+       * <code>required .message.FriendType relationType = 4;</code>
        */
       public Builder setRelationType(FriendType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000008;
         relationType_ = value.getNumber();
         onChanged();
         return this;
       }
       /**
-       * <code>required .message.FriendType relationType = 7;</code>
+       * <code>required .message.FriendType relationType = 4;</code>
        */
       public Builder clearRelationType() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000008);
         relationType_ = 0;
         onChanged();
         return this;
@@ -4802,35 +4730,35 @@ public final class MessageProtos {
 
       private int messageType_ = 0;
       /**
-       * <code>required .message.ChatMessageType messageType = 8;</code>
+       * <code>required .message.ChatMessageType messageType = 5;</code>
        */
       public boolean hasMessageType() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required .message.ChatMessageType messageType = 8;</code>
+       * <code>required .message.ChatMessageType messageType = 5;</code>
        */
       public ChatMessageType getMessageType() {
         ChatMessageType result = ChatMessageType.valueOf(messageType_);
         return result == null ? ChatMessageType.TEXT : result;
       }
       /**
-       * <code>required .message.ChatMessageType messageType = 8;</code>
+       * <code>required .message.ChatMessageType messageType = 5;</code>
        */
       public Builder setMessageType(ChatMessageType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000010;
         messageType_ = value.getNumber();
         onChanged();
         return this;
       }
       /**
-       * <code>required .message.ChatMessageType messageType = 8;</code>
+       * <code>required .message.ChatMessageType messageType = 5;</code>
        */
       public Builder clearMessageType() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         messageType_ = 0;
         onChanged();
         return this;
@@ -4838,34 +4766,34 @@ public final class MessageProtos {
 
       private com.google.protobuf.ByteString content_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes content = 9;</code>
+       * <code>required bytes content = 6;</code>
        */
       public boolean hasContent() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required bytes content = 9;</code>
+       * <code>required bytes content = 6;</code>
        */
       public com.google.protobuf.ByteString getContent() {
         return content_;
       }
       /**
-       * <code>required bytes content = 9;</code>
+       * <code>required bytes content = 6;</code>
        */
       public Builder setContent(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000020;
         content_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required bytes content = 9;</code>
+       * <code>required bytes content = 6;</code>
        */
       public Builder clearContent() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         content_ = getDefaultInstance().getContent();
         onChanged();
         return this;
@@ -4873,13 +4801,13 @@ public final class MessageProtos {
 
       private Object fromID_ = "";
       /**
-       * <code>required string fromID = 10;</code>
+       * <code>required string fromID = 7;</code>
        */
       public boolean hasFromID() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required string fromID = 10;</code>
+       * <code>required string fromID = 7;</code>
        */
       public String getFromID() {
         Object ref = fromID_;
@@ -4896,7 +4824,7 @@ public final class MessageProtos {
         }
       }
       /**
-       * <code>required string fromID = 10;</code>
+       * <code>required string fromID = 7;</code>
        */
       public com.google.protobuf.ByteString
           getFromIDBytes() {
@@ -4912,36 +4840,36 @@ public final class MessageProtos {
         }
       }
       /**
-       * <code>required string fromID = 10;</code>
+       * <code>required string fromID = 7;</code>
        */
       public Builder setFromID(
           String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000040;
         fromID_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string fromID = 10;</code>
+       * <code>required string fromID = 7;</code>
        */
       public Builder clearFromID() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         fromID_ = getDefaultInstance().getFromID();
         onChanged();
         return this;
       }
       /**
-       * <code>required string fromID = 10;</code>
+       * <code>required string fromID = 7;</code>
        */
       public Builder setFromIDBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000040;
         fromID_ = value;
         onChanged();
         return this;
@@ -4949,13 +4877,13 @@ public final class MessageProtos {
 
       private Object toID_ = "";
       /**
-       * <code>required string toID = 11;</code>
+       * <code>required string toID = 8;</code>
        */
       public boolean hasToID() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required string toID = 11;</code>
+       * <code>required string toID = 8;</code>
        */
       public String getToID() {
         Object ref = toID_;
@@ -4972,7 +4900,7 @@ public final class MessageProtos {
         }
       }
       /**
-       * <code>required string toID = 11;</code>
+       * <code>required string toID = 8;</code>
        */
       public com.google.protobuf.ByteString
           getToIDBytes() {
@@ -4988,36 +4916,36 @@ public final class MessageProtos {
         }
       }
       /**
-       * <code>required string toID = 11;</code>
+       * <code>required string toID = 8;</code>
        */
       public Builder setToID(
           String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000080;
         toID_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string toID = 11;</code>
+       * <code>required string toID = 8;</code>
        */
       public Builder clearToID() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000080);
         toID_ = getDefaultInstance().getToID();
         onChanged();
         return this;
       }
       /**
-       * <code>required string toID = 11;</code>
+       * <code>required string toID = 8;</code>
        */
       public Builder setToIDBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000080;
         toID_ = value;
         onChanged();
         return this;
@@ -5025,34 +4953,34 @@ public final class MessageProtos {
 
       private com.google.protobuf.ByteString extra_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional bytes extra = 12;</code>
+       * <code>optional bytes extra = 9;</code>
        */
       public boolean hasExtra() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional bytes extra = 12;</code>
+       * <code>optional bytes extra = 9;</code>
        */
       public com.google.protobuf.ByteString getExtra() {
         return extra_;
       }
       /**
-       * <code>optional bytes extra = 12;</code>
+       * <code>optional bytes extra = 9;</code>
        */
       public Builder setExtra(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000100;
         extra_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bytes extra = 12;</code>
+       * <code>optional bytes extra = 9;</code>
        */
       public Builder clearExtra() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000100);
         extra_ = getDefaultInstance().getExtra();
         onChanged();
         return this;
@@ -8042,35 +7970,35 @@ public final class MessageProtos {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\017dwmessage.proto\022\007message\"\220\001\n\007Message\022\014" +
+      "\n\017dwmessage.proto\022\007message\"\265\001\n\007Message\022\014" +
       "\n\004from\030\001 \002(\t\022\n\n\002to\030\002 \002(\t\022*\n\004type\030\003 \002(\0162\034" +
-      ".message.Message.MessageType\022\014\n\004data\030\004 \001" +
-      "(\014\"1\n\013MessageType\022\010\n\004CHAT\020\000\022\010\n\004LIKE\020\001\022\016\n" +
-      "\nWEALTH_ACK\020\002\"6\n\020MessageContainer\022\"\n\010mes" +
-      "sages\030\001 \003(\0132\020.message.Message\"o\n\024VedioLi" +
-      "keMessageInfo\022\016\n\006likeID\030\001 \002(\t\022\020\n\010belikeI" +
-      "D\030\002 \002(\t\022\014\n\004time\030\003 \002(\003\022\014\n\004icon\030\004 \001(\t\022\014\n\004n" +
-      "ame\030\005 \001(\t\022\013\n\003sex\030\006 \001(\t\"\217\002\n\013ChatMessage\022%" +
-      "\n\006status\030\001 \001(\0162\025.message.ChargeStatus\022\026\n",
-      "\016receiverWealth\030\002 \001(\t\022\016\n\006tempID\030\003 \001(\t\022\013\n" +
-      "\003mid\030\004 \001(\003\022\014\n\004time\030\006 \001(\003\022)\n\014relationType" +
-      "\030\007 \002(\0162\023.message.FriendType\022-\n\013messageTy" +
-      "pe\030\010 \002(\0162\030.message.ChatMessageType\022\017\n\007co" +
-      "ntent\030\t \002(\014\022\016\n\006fromID\030\n \002(\t\022\014\n\004toID\030\013 \002(" +
-      "\t\022\r\n\005extra\030\014 \001(\014\"3\n\024AudioChatMessageInfo" +
-      "\022\016\n\006length\030\001 \002(\005\022\013\n\003url\030\002 \002(\t\"5\n\024ImageCh" +
-      "atMessageInfo\022\020\n\010compress\030\001 \002(\014\022\013\n\003url\030\002" +
-      " \002(\t\"#\n\023TextChatMessageInfo\022\014\n\004text\030\001 \002(" +
-      "\t\"\241\001\n\tWealthACK\022\016\n\006tempID\030\001 \002(\t\022\013\n\003mid\030\002",
-      " \002(\003\022\016\n\006wealth\030\003 \002(\005\022)\n\014relationType\030\004 \002" +
-      "(\0162\023.message.FriendType\022%\n\006status\030\005 \002(\0162" +
-      "\025.message.ChargeStatus\022\025\n\rchargeSuccess\030" +
-      "\006 \002(\010*1\n\017ChatMessageType\022\010\n\004TEXT\020\000\022\t\n\005AU" +
-      "DIO\020\001\022\t\n\005IMAGE\020\002*&\n\nFriendType\022\014\n\010STRANG" +
-      "ER\020\000\022\n\n\006FRIEND\020\001*2\n\014ChargeStatus\022\t\n\005NOMA" +
-      "L\020\000\022\010\n\004FREE\020\001\022\r\n\tORVERFLOW\020\002B:\n)online.d" +
-      "ecentworld.rpc.dto.message.protosB\rMessa" +
-      "geProtos"
+      ".message.Message.MessageType\022\013\n\003mid\030\004 \002(" +
+      "\003\022\014\n\004time\030\005 \002(\003\022\014\n\004data\030\006 \001(\014\";\n\013Message" +
+      "Type\022\010\n\004CHAT\020\000\022\010\n\004LIKE\020\001\022\016\n\nWEALTH_ACK\020\002" +
+      "\022\010\n\004LIST\020\003\"6\n\020MessageContainer\022\"\n\010messag" +
+      "es\030\001 \003(\0132\020.message.Message\"a\n\024VedioLikeM" +
+      "essageInfo\022\016\n\006likeID\030\001 \002(\t\022\020\n\010belikeID\030\002" +
+      " \002(\t\022\014\n\004icon\030\004 \001(\t\022\014\n\004name\030\005 \001(\t\022\013\n\003sex\030" +
+      "\006 \001(\t\"\364\001\n\013ChatMessage\022%\n\006status\030\001 \001(\0162\025.",
+      "message.ChargeStatus\022\026\n\016receiverWealth\030\002" +
+      " \001(\t\022\016\n\006tempID\030\003 \001(\t\022)\n\014relationType\030\004 \002" +
+      "(\0162\023.message.FriendType\022-\n\013messageType\030\005" +
+      " \002(\0162\030.message.ChatMessageType\022\017\n\007conten" +
+      "t\030\006 \002(\014\022\016\n\006fromID\030\007 \002(\t\022\014\n\004toID\030\010 \002(\t\022\r\n" +
+      "\005extra\030\t \001(\014\"3\n\024AudioChatMessageInfo\022\016\n\006" +
+      "length\030\001 \002(\005\022\013\n\003url\030\002 \002(\t\"5\n\024ImageChatMe" +
+      "ssageInfo\022\020\n\010compress\030\001 \002(\014\022\013\n\003url\030\002 \002(\t" +
+      "\"#\n\023TextChatMessageInfo\022\014\n\004text\030\001 \002(\t\"\241\001" +
+      "\n\tWealthACK\022\016\n\006tempID\030\001 \002(\t\022\013\n\003mid\030\002 \002(\003",
+      "\022\016\n\006wealth\030\003 \002(\005\022)\n\014relationType\030\004 \002(\0162\023" +
+      ".message.FriendType\022%\n\006status\030\005 \002(\0162\025.me" +
+      "ssage.ChargeStatus\022\025\n\rchargeSuccess\030\006 \002(" +
+      "\010*1\n\017ChatMessageType\022\010\n\004TEXT\020\000\022\t\n\005AUDIO\020" +
+      "\001\022\t\n\005IMAGE\020\002*&\n\nFriendType\022\014\n\010STRANGER\020\000" +
+      "\022\n\n\006FRIEND\020\001*2\n\014ChargeStatus\022\t\n\005NOMAL\020\000\022" +
+      "\010\n\004FREE\020\001\022\r\n\tORVERFLOW\020\002B:\n)online.decen" +
+      "tworld.rpc.dto.message.protosB\rMessagePr" +
+      "otos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8089,7 +8017,7 @@ public final class MessageProtos {
     internal_static_message_Message_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Message_descriptor,
-        new String[] { "From", "To", "Type", "Data", });
+        new String[] { "From", "To", "Type", "Mid", "Time", "Data", });
     internal_static_message_MessageContainer_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_message_MessageContainer_fieldAccessorTable = new
@@ -8101,13 +8029,13 @@ public final class MessageProtos {
     internal_static_message_VedioLikeMessageInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_VedioLikeMessageInfo_descriptor,
-        new String[] { "LikeID", "BelikeID", "Time", "Icon", "Name", "Sex", });
+        new String[] { "LikeID", "BelikeID", "Icon", "Name", "Sex", });
     internal_static_message_ChatMessage_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_message_ChatMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_ChatMessage_descriptor,
-        new String[] { "Status", "ReceiverWealth", "TempID", "Mid", "Time", "RelationType", "MessageType", "Content", "FromID", "ToID", "Extra", });
+        new String[] { "Status", "ReceiverWealth", "TempID", "RelationType", "MessageType", "Content", "FromID", "ToID", "Extra", });
     internal_static_message_AudioChatMessageInfo_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_message_AudioChatMessageInfo_fieldAccessorTable = new

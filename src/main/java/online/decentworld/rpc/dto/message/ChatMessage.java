@@ -13,8 +13,6 @@ public class ChatMessage implements MessageBody {
     private ChatStatus status;
     private String receiverWealth;
     private String tempID ;
-    private long mid;
-    private long time;
     private ChatRelation relation;
     private ChatMessageType chatType;
     private String fromID;
@@ -39,12 +37,10 @@ public class ChatMessage implements MessageBody {
 
     public ChatMessage(){};
 
-    public ChatMessage(ChatStatus status, String receiverWealth, String tempID, long mid,long time, ChatRelation relation, ChatMessageType type, String fromID, String toID) {
+    public ChatMessage(ChatStatus status, String receiverWealth, String tempID, ChatRelation relation, ChatMessageType type, String fromID, String toID) {
         this.status = status;
         this.receiverWealth = receiverWealth;
         this.tempID = tempID;
-        this.mid = mid;
-        this.time = time;
         this.relation = relation;
         this.chatType = type;
         this.fromID = fromID;
@@ -106,22 +102,6 @@ public class ChatMessage implements MessageBody {
 
     public void setTempID(String tempID) {
         this.tempID = tempID;
-    }
-
-    public long getMid() {
-        return mid;
-    }
-
-    public void setMid(long mid) {
-        this.mid = mid;
-    }
-
-    public long getTime() {
-        return time;
-    }
-
-    public void setTime(long time) {
-        this.time = time;
     }
 
     public ChatRelation getRelation() {

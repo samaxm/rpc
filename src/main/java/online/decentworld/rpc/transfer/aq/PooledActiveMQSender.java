@@ -1,7 +1,11 @@
 package online.decentworld.rpc.transfer.aq;
 
 import online.decentworld.rpc.codc.Codec;
+import online.decentworld.rpc.codc.protos.ReflectBodyConverterFactory;
+import online.decentworld.rpc.codc.protos.SimpleProtosCodec;
+import online.decentworld.rpc.dto.message.LikeMessageBody;
 import online.decentworld.rpc.dto.message.MessageWrapper;
+import online.decentworld.rpc.dto.message.types.MessageType;
 import online.decentworld.rpc.transfer.Sender;
 import online.decentworld.rpc.transfer.TransferPolicy;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -12,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
+import java.util.Date;
 
 public class PooledActiveMQSender implements Sender{
 	
@@ -24,7 +29,6 @@ public class PooledActiveMQSender implements Sender{
 	@Override
 	public void send(byte[] data, String receiver,
 			TransferPolicy policy) throws Exception {
-		
 		if(check(data, receiver, policy)){
 			ActiveMQPolicy aqp=(ActiveMQPolicy)policy;
 			Session session=getConnection().createSession(aqp.isTransactional(),aqp.getSessionMode());
@@ -117,12 +121,15 @@ public class PooledActiveMQSender implements Sender{
 //			}
 //		}).start();
 //
-// 		PooledActiveMQSender sender=new PooledActiveMQSender();
-//		ProtosVedioLikeMessageBody body=new ProtosVedioLikeMessageBody("123", "sam", "123", "123", "1", new Date());
-//		try {
-//			sender.send(ProtosVedioLikeMessage.create(body), new SimpleMessageRecipient("testA"));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		PooledActiveMQSender sender=new PooledActiveMQSender();
+		SimpleProtosCodec codec= new SimpleProtosCodec();
+		codec.setConverterFactory(new ReflectBodyConverterFactory());
+
+		try {
+			MessageWrapper wrapper=new MessageWrapper("system","123", MessageType.LIKE,new LikeMessageBody("aaa","bbb","123","456","male"),new Date(),0);
+			sender.send(codec.encode(wrapper),"testA",ActiveMQPolicy.BRIEF);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

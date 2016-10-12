@@ -27,8 +27,8 @@ public final class AudioChatMessage extends ChatMessage {
         this.url = url;
     }
 
-    public AudioChatMessage(ChatStatus status, String receiverWealth, String tempID, long mid,long time, ChatRelation relation, ChatMessageType type, String fromID, String toID, int length, String url) {
-        super(status, receiverWealth, tempID, mid, time, relation, type, fromID, toID);
+    public AudioChatMessage(ChatStatus status, String receiverWealth, String tempID, ChatRelation relation, ChatMessageType type, String fromID, String toID, int length, String url) {
+        super(status, receiverWealth, tempID, relation, type, fromID, toID);
         this.length = length;
         this.url = url;
     }

@@ -15,7 +15,7 @@ public final class AQConfig {
 		Properties p=null;
 		try{
 			p=new Properties();
-			p.load(AQConfig.class.getResourceAsStream("AQConfig.properties"));
+			p.load(AQConfig.class.getClassLoader().getResourceAsStream("AQConfig.properties"));
 		}catch(Exception ex){}
 		USERNAME=p.getProperty("USERNAME");
 		PASSWORD=p.getProperty("PASSWORD");

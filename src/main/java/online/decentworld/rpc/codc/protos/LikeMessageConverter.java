@@ -6,8 +6,6 @@ import online.decentworld.rpc.dto.message.MessageBody;
 import online.decentworld.rpc.dto.message.MessageWrapper;
 import online.decentworld.rpc.dto.message.protos.MessageProtos.VedioLikeMessageInfo;
 
-import java.util.Date;
-
 public class LikeMessageConverter extends ProcosMessageWrapper{
 
 	
@@ -15,7 +13,7 @@ public class LikeMessageConverter extends ProcosMessageWrapper{
 	@Override
 	public MessageWrapper warpMessageBody(MessageWrapper wrapper,ByteString bodyData) throws Exception {
 		VedioLikeMessageInfo info=VedioLikeMessageInfo.parseFrom(bodyData);
-		LikeMessageBody likeMessageBody=new LikeMessageBody(info.getIcon(),info.getName(),info.getLikeID(),info.getBelikeID(),info.getSex(),new Date(info.getTime()));
+		LikeMessageBody likeMessageBody=new LikeMessageBody(info.getIcon(),info.getName(),info.getLikeID(),info.getBelikeID(),info.getSex());
 		wrapper.setBody(likeMessageBody);
 		return wrapper;
 	}
@@ -25,6 +23,6 @@ public class LikeMessageConverter extends ProcosMessageWrapper{
 		LikeMessageBody likebody=(LikeMessageBody)body;
 		return VedioLikeMessageInfo.newBuilder().setBelikeID(likebody.getBeLikedID()).setIcon(likebody.getIcon())
 				.setLikeID(likebody.getLikeID()).setName(likebody.getName()).setSex(likebody.getSex())
-				.setTime(likebody.getTime().getTime()).build().toByteString();
+				.build().toByteString();
 	}
 }
