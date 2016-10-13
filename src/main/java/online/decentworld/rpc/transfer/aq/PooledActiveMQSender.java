@@ -45,7 +45,7 @@ public class PooledActiveMQSender implements Sender{
 			producer.send(msg);
 		}
 	}
-	
+	@Override
 	public void send(MessageWrapper msg,String receiver) throws Exception{
 		send(codec.encode(msg), receiver,ActiveMQPolicy.BRIEF);
 	}
@@ -131,5 +131,9 @@ public class PooledActiveMQSender implements Sender{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void setCodec(Codec codec) {
+		this.codec = codec;
 	}
 }
