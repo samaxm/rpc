@@ -1,7 +1,7 @@
 package online.decentworld.rpc.transfer.aq;
 
 import online.decentworld.rpc.codc.Codec;
-import online.decentworld.rpc.codc.protos.ReflectBodyConverterFactory;
+import online.decentworld.rpc.codc.ReflectConverterFactory;
 import online.decentworld.rpc.codc.protos.SimpleProtosCodec;
 import online.decentworld.rpc.dto.message.LikeMessageBody;
 import online.decentworld.rpc.dto.message.MessageWrapper;
@@ -123,10 +123,10 @@ public class PooledActiveMQSender implements Sender{
 //
 		PooledActiveMQSender sender=new PooledActiveMQSender();
 		SimpleProtosCodec codec= new SimpleProtosCodec();
-		codec.setConverterFactory(new ReflectBodyConverterFactory());
+		codec.setConverterFactory(new ReflectConverterFactory());
 
 		try {
-			MessageWrapper wrapper=new MessageWrapper("system","123", MessageType.LIKE,new LikeMessageBody("aaa","bbb","123","456","male"),new Date(),0);
+			MessageWrapper wrapper=new MessageWrapper("system","123", MessageType.NOTICE_LIKE,new LikeMessageBody("aaa","bbb","123","456","male"),new Date(),0);
 			sender.send(codec.encode(wrapper),"testA",ActiveMQPolicy.BRIEF);
 		} catch (Exception e) {
 			e.printStackTrace();

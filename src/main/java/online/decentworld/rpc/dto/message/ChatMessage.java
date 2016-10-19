@@ -1,20 +1,17 @@
 package online.decentworld.rpc.dto.message;
 
-import online.decentworld.rpc.dto.message.types.ChatMessageType;
 import online.decentworld.rpc.dto.message.types.ChatRelation;
 import online.decentworld.rpc.dto.message.types.ChatStatus;
-import online.decentworld.rpc.dto.message.types.MessageType;
 
 /**
  * Created by Sammax on 2016/9/13.
  */
-public class ChatMessage implements MessageBody {
+public abstract class ChatMessage implements MessageBody {
 
     private ChatStatus status;
     private String receiverWealth;
     private String tempID ;
     private ChatRelation relation;
-    private ChatMessageType chatType;
     private String fromID;
 
     public String getFromID() {
@@ -37,12 +34,11 @@ public class ChatMessage implements MessageBody {
 
     public ChatMessage(){};
 
-    public ChatMessage(ChatStatus status, String receiverWealth, String tempID, ChatRelation relation, ChatMessageType type, String fromID, String toID) {
+    public ChatMessage(ChatStatus status, String receiverWealth, String tempID, ChatRelation relation, String fromID, String toID) {
         this.status = status;
         this.receiverWealth = receiverWealth;
         this.tempID = tempID;
         this.relation = relation;
-        this.chatType = type;
         this.fromID = fromID;
         this.toID = toID;
     }
@@ -111,17 +107,4 @@ public class ChatMessage implements MessageBody {
     public void setRelation(ChatRelation relation) {
         this.relation = relation;
     }
-
-    public ChatMessageType getChatType() {
-        return chatType;
-    }
-
-    public void setChatType(ChatMessageType chatType) {
-        this.chatType = chatType;
-    }
-    @Override
-    public MessageType getType() {
-        return MessageType.CHAT;
-    }
-
 }

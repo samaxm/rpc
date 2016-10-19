@@ -39,6 +39,6 @@ public final class LikeMessageBody implements MessageBody {
 
 	@Override
 	public MessageType getType() {
-		return MessageType.LIKE;
+		return MessageType.NOTICE_LIKE;
 	}
 }

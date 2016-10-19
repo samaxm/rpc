@@ -1,8 +1,8 @@
 package online.decentworld.rpc.dto.message;
 
-import online.decentworld.rpc.dto.message.types.ChatMessageType;
 import online.decentworld.rpc.dto.message.types.ChatRelation;
 import online.decentworld.rpc.dto.message.types.ChatStatus;
+import online.decentworld.rpc.dto.message.types.MessageType;
 
 /**
  * Created by Sammax on 2016/9/13.
@@ -27,8 +27,8 @@ public final class AudioChatMessage extends ChatMessage {
         this.url = url;
     }
 
-    public AudioChatMessage(ChatStatus status, String receiverWealth, String tempID, ChatRelation relation, ChatMessageType type, String fromID, String toID, int length, String url) {
-        super(status, receiverWealth, tempID, relation, type, fromID, toID);
+    public AudioChatMessage(ChatStatus status, String receiverWealth, String tempID, ChatRelation relation,String fromID, String toID, int length, String url) {
+        super(status, receiverWealth, tempID, relation,fromID, toID);
         this.length = length;
         this.url = url;
     }
@@ -42,7 +42,11 @@ public final class AudioChatMessage extends ChatMessage {
         msg.setFromID(from);
         msg.setLength(length);
         msg.setUrl(url);
-        msg.setChatType(ChatMessageType.AUDIO);
         return msg;
+    }
+
+    @Override
+    public MessageType getType() {
+        return MessageType.CHAT_AUDIO;
     }
 }

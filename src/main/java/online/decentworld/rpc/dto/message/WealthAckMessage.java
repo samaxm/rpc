@@ -77,6 +77,6 @@ final public class WealthAckMessage implements MessageBody{
 
     @Override
     public MessageType getType() {
-        return MessageType.WEALTH_ACK;
+        return MessageType.COMMAND_WEALTH_ACK;
     }
 }
