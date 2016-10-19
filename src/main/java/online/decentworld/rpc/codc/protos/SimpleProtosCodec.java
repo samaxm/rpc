@@ -58,6 +58,23 @@ public class SimpleProtosCodec extends AbstractCodec{
 		return null;
 	}
 
+
+	public Message encodeProtoMessage(MessageWrapper msg) {
+		ProtosMessageConverter converter=getMessageConverter(msg.getType());
+		if(converter!=null){
+			try {
+				return converter.convertFromBean2Protos(msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.warn("[PARSE_MESSAGE_FAILED]",e);
+			}
+		}else{
+			logger.warn("[UNSUPPORTED_MESSAGE_TYPE] type#"+msg.getType());
+		}
+		return null;
+	}
+
+
 	@Override
 	public void addListener(MessageListener listener) {
 		synchronized (this) {
