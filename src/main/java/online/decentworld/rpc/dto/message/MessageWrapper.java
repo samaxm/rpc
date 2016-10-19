@@ -6,10 +6,6 @@ import java.util.Date;
 
 public class MessageWrapper {
 
-	private String sender;
-
-	private String receiver;
-
 	private MessageType type;
 
 	private MessageBody body;
@@ -18,9 +14,7 @@ public class MessageWrapper {
 
 	private long mid;
 
-	public MessageWrapper(String sender, String receiver, MessageType type, MessageBody body, Date time, long mid) {
-		this.sender = sender;
-		this.receiver = receiver;
+	public MessageWrapper( MessageType type, MessageBody body, Date time, long mid) {
 		this.type = type;
 		this.body = body;
 		this.time = time;
@@ -29,23 +23,6 @@ public class MessageWrapper {
 
 
 	public MessageWrapper(){}
-
-
-	public String getSender() {
-		return sender;
-	}
-
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
-
-	public String getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
 
 	public MessageType getType() {
 		return type;
