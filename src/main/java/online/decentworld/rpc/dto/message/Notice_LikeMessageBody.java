@@ -2,7 +2,7 @@ package online.decentworld.rpc.dto.message;
 
 import online.decentworld.rpc.dto.message.types.MessageType;
 
-public final class LikeMessageBody implements MessageBody {
+public final class Notice_LikeMessageBody implements MessageBody {
 
 	private final String icon;
 	private final String name;
@@ -11,8 +11,8 @@ public final class LikeMessageBody implements MessageBody {
 	private final String sex;
 
 	
-	public LikeMessageBody(String icon, String name, String likeID,
-						   String beLikedID, String sex) {
+	public Notice_LikeMessageBody(String icon, String name, String likeID,
+								  String beLikedID, String sex) {
 		super();
 		this.icon = icon;
 		this.name = name;

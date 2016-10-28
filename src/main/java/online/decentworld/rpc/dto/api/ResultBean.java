@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 public class ResultBean {
 	private int statusCode;
 	private String msg;
-	final public static ResultBean SUCCESS=new ResultBean(StatusCode.SUCCESS); 
+	final public static ResultBean SUCCESS=new ObjectResultBean(StatusCode.SUCCESS,null,null);
 	public int getStatusCode() {
 		return statusCode;
 	}
@@ -26,14 +26,11 @@ public class ResultBean {
 	}
 	public ResultBean() {
 	}
-	
+
 	public String toJSON(){
 		return JSON.toJSONString(this);
 	}
 	public static ResultBean FAIL(String msg){
-		ResultBean bean=new ResultBean();
-		bean.setStatusCode(StatusCode.FAILED);
-		bean.setMsg(msg);
-		return bean;
+		return ObjectResultBean.FAIL(msg);
 	}
 }

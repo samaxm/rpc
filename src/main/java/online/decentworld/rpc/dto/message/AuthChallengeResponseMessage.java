@@ -8,9 +8,11 @@ import online.decentworld.rpc.dto.message.types.MessageType;
 public class AuthChallengeResponseMessage implements MessageBody {
 
     private String response;
+    private String dwID;
 
-    public AuthChallengeResponseMessage(String response) {
+    public AuthChallengeResponseMessage(String dwID,String response) {
         this.response = response;
+        this.dwID=dwID;
     }
 
     public String getResponse() {
@@ -24,5 +26,13 @@ public class AuthChallengeResponseMessage implements MessageBody {
     @Override
     public MessageType getType() {
         return MessageType.COMMAND_AUTH_CHALLENGE_RESPONSE;
+    }
+
+    public String getDwID() {
+        return dwID;
+    }
+
+    public void setDwID(String dwID) {
+        this.dwID = dwID;
     }
 }

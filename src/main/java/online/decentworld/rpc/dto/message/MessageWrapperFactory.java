@@ -10,7 +10,6 @@ import java.util.Date;
 public class MessageWrapperFactory {
 
     public static MessageWrapper createLikeMessage(String dwID,String likedID,String name,String icon,String sex){
-        return new MessageWrapper(MessageType.NOTICE_LIKE,new LikeMessageBody(icon,name,dwID,likedID,sex),new Date(),0);
+        return new MessageWrapper(dwID,likedID,MessageType.NOTICE_LIKE,new Notice_LikeMessageBody(icon,name,dwID,likedID,sex),new Date(),0);
     }
-
 }

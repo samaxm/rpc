@@ -17,6 +17,8 @@ public abstract class ProcosMessageWrapper implements MessageConverter {
     @Override
     public MessageWrapper fromStream2Bean(MessageProtos.Message msg) throws Exception {
         MessageWrapper wrapper=new MessageWrapper();
+        wrapper.setReceiverID(msg.getTo());
+        wrapper.setSenderID(msg.getFrom());
         wrapper.setTime(new Date(msg.getTime()));
         wrapper.setMid(msg.getMid());
         wrapper.setType(MessageType.getMessageType(msg.getType().getNumber()));
@@ -30,6 +32,7 @@ public abstract class ProcosMessageWrapper implements MessageConverter {
         ByteString data=conver2ByteString(wrapper.getBody());
         return MessageProtos.Message.newBuilder()
                 .setMid(wrapper.getMid()).setTime(wrapper.getTime().getTime())
+                .setFrom(wrapper.getSenderID()).setTo(wrapper.getReceiverID())
                 .setType(MessageProtos.Message.MessageType.forNumber(wrapper.getType().getCode())).setData(data).build().toByteArray();
     }
 

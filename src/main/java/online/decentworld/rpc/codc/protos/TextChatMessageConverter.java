@@ -10,7 +10,7 @@ import online.decentworld.rpc.dto.message.types.ChatStatus;
 /**
  * Created by Sammax on 2016/9/14.
  */
-public abstract class TextChatMessageConverter extends ProcosMessageWrapper {
+public class TextChatMessageConverter extends ProcosMessageWrapper {
 
 
     @Override

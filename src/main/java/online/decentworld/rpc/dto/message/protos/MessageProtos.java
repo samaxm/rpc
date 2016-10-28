@@ -208,6 +208,34 @@ public final class MessageProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <code>required string from = 1;</code>
+     */
+    boolean hasFrom();
+    /**
+     * <code>required string from = 1;</code>
+     */
+    String getFrom();
+    /**
+     * <code>required string from = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getFromBytes();
+
+    /**
+     * <code>required string to = 2;</code>
+     */
+    boolean hasTo();
+    /**
+     * <code>required string to = 2;</code>
+     */
+    String getTo();
+    /**
+     * <code>required string to = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getToBytes();
+
+    /**
      * <code>required .message.Message.MessageType type = 3;</code>
      */
     boolean hasType();
@@ -255,6 +283,8 @@ public final class MessageProtos {
       super(builder);
     }
     private Message() {
+      from_ = "";
+      to_ = "";
       type_ = 0;
       mid_ = 0L;
       time_ = 0L;
@@ -289,29 +319,41 @@ public final class MessageProtos {
               }
               break;
             }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              from_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              to_ = bs;
+              break;
+            }
             case 24: {
               int rawValue = input.readEnum();
               MessageType value = MessageType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
-                bitField0_ |= 0x00000001;
+                bitField0_ |= 0x00000004;
                 type_ = rawValue;
               }
               break;
             }
             case 32: {
-              bitField0_ |= 0x00000002;
+              bitField0_ |= 0x00000008;
               mid_ = input.readInt64();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000010;
               time_ = input.readInt64();
               break;
             }
             case 50: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000020;
               data_ = input.readBytes();
               break;
             }
@@ -385,9 +427,21 @@ public final class MessageProtos {
        */
       COMMAND_AUTH_CHALLENGE_RESPONSE(15),
       /**
+       * <code>COMMAND_AUTH_CHALLENGE_RESPONSE_ACK = 16;</code>
+       */
+      COMMAND_AUTH_CHALLENGE_RESPONSE_ACK(16),
+      /**
+       * <code>COMMAND_PING = 17;</code>
+       */
+      COMMAND_PING(17),
+      /**
        * <code>NOTICE_LIKE = 100;</code>
        */
       NOTICE_LIKE(100),
+      /**
+       * <code>NOTICE_RECHARGE = 101;</code>
+       */
+      NOTICE_RECHARGE(101),
       ;
 
       /**
@@ -431,9 +485,21 @@ public final class MessageProtos {
        */
       public static final int COMMAND_AUTH_CHALLENGE_RESPONSE_VALUE = 15;
       /**
+       * <code>COMMAND_AUTH_CHALLENGE_RESPONSE_ACK = 16;</code>
+       */
+      public static final int COMMAND_AUTH_CHALLENGE_RESPONSE_ACK_VALUE = 16;
+      /**
+       * <code>COMMAND_PING = 17;</code>
+       */
+      public static final int COMMAND_PING_VALUE = 17;
+      /**
        * <code>NOTICE_LIKE = 100;</code>
        */
       public static final int NOTICE_LIKE_VALUE = 100;
+      /**
+       * <code>NOTICE_RECHARGE = 101;</code>
+       */
+      public static final int NOTICE_RECHARGE_VALUE = 101;
 
 
       public final int getNumber() {
@@ -460,7 +526,10 @@ public final class MessageProtos {
           case 13: return COMMAND_MSG_SYNC_FIN;
           case 14: return COMMAND_AUTH_CHALLENGE;
           case 15: return COMMAND_AUTH_CHALLENGE_RESPONSE;
+          case 16: return COMMAND_AUTH_CHALLENGE_RESPONSE_ACK;
+          case 17: return COMMAND_PING;
           case 100: return NOTICE_LIKE;
+          case 101: return NOTICE_RECHARGE;
           default: return null;
         }
       }
@@ -511,13 +580,97 @@ public final class MessageProtos {
     }
 
     private int bitField0_;
+    public static final int FROM_FIELD_NUMBER = 1;
+    private volatile Object from_;
+    /**
+     * <code>required string from = 1;</code>
+     */
+    public boolean hasFrom() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string from = 1;</code>
+     */
+    public String getFrom() {
+      Object ref = from_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          from_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string from = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFromBytes() {
+      Object ref = from_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        from_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TO_FIELD_NUMBER = 2;
+    private volatile Object to_;
+    /**
+     * <code>required string to = 2;</code>
+     */
+    public boolean hasTo() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string to = 2;</code>
+     */
+    public String getTo() {
+      Object ref = to_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          to_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string to = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getToBytes() {
+      Object ref = to_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        to_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     public static final int TYPE_FIELD_NUMBER = 3;
     private int type_;
     /**
      * <code>required .message.Message.MessageType type = 3;</code>
      */
     public boolean hasType() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>required .message.Message.MessageType type = 3;</code>
@@ -533,7 +686,7 @@ public final class MessageProtos {
      * <code>required int64 mid = 4;</code>
      */
     public boolean hasMid() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>required int64 mid = 4;</code>
@@ -548,7 +701,7 @@ public final class MessageProtos {
      * <code>required int64 time = 5;</code>
      */
     public boolean hasTime() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>required int64 time = 5;</code>
@@ -563,7 +716,7 @@ public final class MessageProtos {
      * <code>optional bytes data = 6;</code>
      */
     public boolean hasData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional bytes data = 6;</code>
@@ -578,6 +731,14 @@ public final class MessageProtos {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasFrom()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTo()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!hasType()) {
         memoizedIsInitialized = 0;
         return false;
@@ -597,15 +758,21 @@ public final class MessageProtos {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(3, type_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, from_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(4, mid_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, to_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(5, time_);
+        output.writeEnum(3, type_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, mid_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, time_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, data_);
       }
       unknownFields.writeTo(output);
@@ -617,18 +784,24 @@ public final class MessageProtos {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, type_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, from_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, mid_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, to_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, time_);
+          .computeEnumSize(3, type_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, mid_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, time_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, data_);
       }
@@ -649,6 +822,16 @@ public final class MessageProtos {
       Message other = (Message) obj;
 
       boolean result = true;
+      result = result && (hasFrom() == other.hasFrom());
+      if (hasFrom()) {
+        result = result && getFrom()
+            .equals(other.getFrom());
+      }
+      result = result && (hasTo() == other.hasTo());
+      if (hasTo()) {
+        result = result && getTo()
+            .equals(other.getTo());
+      }
       result = result && (hasType() == other.hasType());
       if (hasType()) {
         result = result && type_ == other.type_;
@@ -679,6 +862,14 @@ public final class MessageProtos {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasFrom()) {
+        hash = (37 * hash) + FROM_FIELD_NUMBER;
+        hash = (53 * hash) + getFrom().hashCode();
+      }
+      if (hasTo()) {
+        hash = (37 * hash) + TO_FIELD_NUMBER;
+        hash = (53 * hash) + getTo().hashCode();
+      }
       if (hasType()) {
         hash = (37 * hash) + TYPE_FIELD_NUMBER;
         hash = (53 * hash) + type_;
@@ -815,14 +1006,18 @@ public final class MessageProtos {
       }
       public Builder clear() {
         super.clear();
-        type_ = 0;
+        from_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        mid_ = 0L;
+        to_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        time_ = 0L;
+        type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        data_ = com.google.protobuf.ByteString.EMPTY;
+        mid_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        time_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        data_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -850,17 +1045,25 @@ public final class MessageProtos {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.type_ = type_;
+        result.from_ = from_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.mid_ = mid_;
+        result.to_ = to_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.time_ = time_;
+        result.type_ = type_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
+        }
+        result.mid_ = mid_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.time_ = time_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.data_ = data_;
         result.bitField0_ = to_bitField0_;
@@ -905,6 +1108,16 @@ public final class MessageProtos {
 
       public Builder mergeFrom(Message other) {
         if (other == Message.getDefaultInstance()) return this;
+        if (other.hasFrom()) {
+          bitField0_ |= 0x00000001;
+          from_ = other.from_;
+          onChanged();
+        }
+        if (other.hasTo()) {
+          bitField0_ |= 0x00000002;
+          to_ = other.to_;
+          onChanged();
+        }
         if (other.hasType()) {
           setType(other.getType());
         }
@@ -923,6 +1136,12 @@ public final class MessageProtos {
       }
 
       public final boolean isInitialized() {
+        if (!hasFrom()) {
+          return false;
+        }
+        if (!hasTo()) {
+          return false;
+        }
         if (!hasType()) {
           return false;
         }
@@ -954,12 +1173,164 @@ public final class MessageProtos {
       }
       private int bitField0_;
 
+      private Object from_ = "";
+      /**
+       * <code>required string from = 1;</code>
+       */
+      public boolean hasFrom() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string from = 1;</code>
+       */
+      public String getFrom() {
+        Object ref = from_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            from_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string from = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFromBytes() {
+        Object ref = from_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          from_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string from = 1;</code>
+       */
+      public Builder setFrom(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        from_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string from = 1;</code>
+       */
+      public Builder clearFrom() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        from_ = getDefaultInstance().getFrom();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string from = 1;</code>
+       */
+      public Builder setFromBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        from_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object to_ = "";
+      /**
+       * <code>required string to = 2;</code>
+       */
+      public boolean hasTo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string to = 2;</code>
+       */
+      public String getTo() {
+        Object ref = to_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            to_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string to = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getToBytes() {
+        Object ref = to_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          to_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string to = 2;</code>
+       */
+      public Builder setTo(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        to_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string to = 2;</code>
+       */
+      public Builder clearTo() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        to_ = getDefaultInstance().getTo();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string to = 2;</code>
+       */
+      public Builder setToBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        to_ = value;
+        onChanged();
+        return this;
+      }
+
       private int type_ = 0;
       /**
        * <code>required .message.Message.MessageType type = 3;</code>
        */
       public boolean hasType() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>required .message.Message.MessageType type = 3;</code>
@@ -975,7 +1346,7 @@ public final class MessageProtos {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000001;
+        bitField0_ |= 0x00000004;
         type_ = value.getNumber();
         onChanged();
         return this;
@@ -984,7 +1355,7 @@ public final class MessageProtos {
        * <code>required .message.Message.MessageType type = 3;</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000004);
         type_ = 0;
         onChanged();
         return this;
@@ -995,7 +1366,7 @@ public final class MessageProtos {
        * <code>required int64 mid = 4;</code>
        */
       public boolean hasMid() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>required int64 mid = 4;</code>
@@ -1007,7 +1378,7 @@ public final class MessageProtos {
        * <code>required int64 mid = 4;</code>
        */
       public Builder setMid(long value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000008;
         mid_ = value;
         onChanged();
         return this;
@@ -1016,7 +1387,7 @@ public final class MessageProtos {
        * <code>required int64 mid = 4;</code>
        */
       public Builder clearMid() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000008);
         mid_ = 0L;
         onChanged();
         return this;
@@ -1027,7 +1398,7 @@ public final class MessageProtos {
        * <code>required int64 time = 5;</code>
        */
       public boolean hasTime() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>required int64 time = 5;</code>
@@ -1039,7 +1410,7 @@ public final class MessageProtos {
        * <code>required int64 time = 5;</code>
        */
       public Builder setTime(long value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000010;
         time_ = value;
         onChanged();
         return this;
@@ -1048,7 +1419,7 @@ public final class MessageProtos {
        * <code>required int64 time = 5;</code>
        */
       public Builder clearTime() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000010);
         time_ = 0L;
         onChanged();
         return this;
@@ -1059,7 +1430,7 @@ public final class MessageProtos {
        * <code>optional bytes data = 6;</code>
        */
       public boolean hasData() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional bytes data = 6;</code>
@@ -1074,7 +1445,7 @@ public final class MessageProtos {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000020;
         data_ = value;
         onChanged();
         return this;
@@ -1083,7 +1454,7 @@ public final class MessageProtos {
        * <code>optional bytes data = 6;</code>
        */
       public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000020);
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
@@ -8036,6 +8407,746 @@ public final class MessageProtos {
 
   }
 
+  public interface Notice_RechargeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:message.Notice_Recharge)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string dwID = 1;</code>
+     */
+    boolean hasDwID();
+    /**
+     * <code>required string dwID = 1;</code>
+     */
+    String getDwID();
+    /**
+     * <code>required string dwID = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getDwIDBytes();
+
+    /**
+     * <code>required int64 time = 2;</code>
+     */
+    boolean hasTime();
+    /**
+     * <code>required int64 time = 2;</code>
+     */
+    long getTime();
+
+    /**
+     * <code>required int32 amount = 3;</code>
+     */
+    boolean hasAmount();
+    /**
+     * <code>required int32 amount = 3;</code>
+     */
+    int getAmount();
+  }
+  /**
+   * Protobuf type {@code message.Notice_Recharge}
+   */
+  public  static final class Notice_Recharge extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:message.Notice_Recharge)
+      Notice_RechargeOrBuilder {
+    // Use Notice_Recharge.newBuilder() to construct.
+    private Notice_Recharge(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Notice_Recharge() {
+      dwID_ = "";
+      time_ = 0L;
+      amount_ = 0;
+    }
+
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Notice_Recharge(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              dwID_ = bs;
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              time_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              amount_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return MessageProtos.internal_static_message_Notice_Recharge_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return MessageProtos.internal_static_message_Notice_Recharge_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              Notice_Recharge.class, Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int DWID_FIELD_NUMBER = 1;
+    private volatile Object dwID_;
+    /**
+     * <code>required string dwID = 1;</code>
+     */
+    public boolean hasDwID() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string dwID = 1;</code>
+     */
+    public String getDwID() {
+      Object ref = dwID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dwID_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string dwID = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDwIDBytes() {
+      Object ref = dwID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        dwID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TIME_FIELD_NUMBER = 2;
+    private long time_;
+    /**
+     * <code>required int64 time = 2;</code>
+     */
+    public boolean hasTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int64 time = 2;</code>
+     */
+    public long getTime() {
+      return time_;
+    }
+
+    public static final int AMOUNT_FIELD_NUMBER = 3;
+    private int amount_;
+    /**
+     * <code>required int32 amount = 3;</code>
+     */
+    public boolean hasAmount() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 amount = 3;</code>
+     */
+    public int getAmount() {
+      return amount_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasDwID()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasAmount()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, dwID_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, time_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, amount_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, dwID_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, time_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, amount_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    public boolean equals(final Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof Notice_Recharge)) {
+        return super.equals(obj);
+      }
+      Notice_Recharge other = (Notice_Recharge) obj;
+
+      boolean result = true;
+      result = result && (hasDwID() == other.hasDwID());
+      if (hasDwID()) {
+        result = result && getDwID()
+            .equals(other.getDwID());
+      }
+      result = result && (hasTime() == other.hasTime());
+      if (hasTime()) {
+        result = result && (getTime()
+            == other.getTime());
+      }
+      result = result && (hasAmount() == other.hasAmount());
+      if (hasAmount()) {
+        result = result && (getAmount()
+            == other.getAmount());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      if (hasDwID()) {
+        hash = (37 * hash) + DWID_FIELD_NUMBER;
+        hash = (53 * hash) + getDwID().hashCode();
+      }
+      if (hasTime()) {
+        hash = (37 * hash) + TIME_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getTime());
+      }
+      if (hasAmount()) {
+        hash = (37 * hash) + AMOUNT_FIELD_NUMBER;
+        hash = (53 * hash) + getAmount();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static Notice_Recharge parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static Notice_Recharge parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static Notice_Recharge parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static Notice_Recharge parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static Notice_Recharge parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static Notice_Recharge parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static Notice_Recharge parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static Notice_Recharge parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static Notice_Recharge parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static Notice_Recharge parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(Notice_Recharge prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code message.Notice_Recharge}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:message.Notice_Recharge)
+        Notice_RechargeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return MessageProtos.internal_static_message_Notice_Recharge_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return MessageProtos.internal_static_message_Notice_Recharge_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                Notice_Recharge.class, Builder.class);
+      }
+
+      // Construct using online.decentworld.rpc.dto.message.protos.MessageProtos.Notice_Recharge.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        dwID_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        time_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        amount_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return MessageProtos.internal_static_message_Notice_Recharge_descriptor;
+      }
+
+      public Notice_Recharge getDefaultInstanceForType() {
+        return Notice_Recharge.getDefaultInstance();
+      }
+
+      public Notice_Recharge build() {
+        Notice_Recharge result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public Notice_Recharge buildPartial() {
+        Notice_Recharge result = new Notice_Recharge(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.dwID_ = dwID_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.time_ = time_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.amount_ = amount_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof Notice_Recharge) {
+          return mergeFrom((Notice_Recharge)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(Notice_Recharge other) {
+        if (other == Notice_Recharge.getDefaultInstance()) return this;
+        if (other.hasDwID()) {
+          bitField0_ |= 0x00000001;
+          dwID_ = other.dwID_;
+          onChanged();
+        }
+        if (other.hasTime()) {
+          setTime(other.getTime());
+        }
+        if (other.hasAmount()) {
+          setAmount(other.getAmount());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasDwID()) {
+          return false;
+        }
+        if (!hasTime()) {
+          return false;
+        }
+        if (!hasAmount()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Notice_Recharge parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (Notice_Recharge) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private Object dwID_ = "";
+      /**
+       * <code>required string dwID = 1;</code>
+       */
+      public boolean hasDwID() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string dwID = 1;</code>
+       */
+      public String getDwID() {
+        Object ref = dwID_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            dwID_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string dwID = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDwIDBytes() {
+        Object ref = dwID_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          dwID_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string dwID = 1;</code>
+       */
+      public Builder setDwID(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        dwID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string dwID = 1;</code>
+       */
+      public Builder clearDwID() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        dwID_ = getDefaultInstance().getDwID();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string dwID = 1;</code>
+       */
+      public Builder setDwIDBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        dwID_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long time_ ;
+      /**
+       * <code>required int64 time = 2;</code>
+       */
+      public boolean hasTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int64 time = 2;</code>
+       */
+      public long getTime() {
+        return time_;
+      }
+      /**
+       * <code>required int64 time = 2;</code>
+       */
+      public Builder setTime(long value) {
+        bitField0_ |= 0x00000002;
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int64 time = 2;</code>
+       */
+      public Builder clearTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        time_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int amount_ ;
+      /**
+       * <code>required int32 amount = 3;</code>
+       */
+      public boolean hasAmount() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 amount = 3;</code>
+       */
+      public int getAmount() {
+        return amount_;
+      }
+      /**
+       * <code>required int32 amount = 3;</code>
+       */
+      public Builder setAmount(int value) {
+        bitField0_ |= 0x00000004;
+        amount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 amount = 3;</code>
+       */
+      public Builder clearAmount() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        amount_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:message.Notice_Recharge)
+    }
+
+    // @@protoc_insertion_point(class_scope:message.Notice_Recharge)
+    private static final Notice_Recharge DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new Notice_Recharge();
+    }
+
+    public static Notice_Recharge getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @Deprecated public static final com.google.protobuf.Parser<Notice_Recharge>
+        PARSER = new com.google.protobuf.AbstractParser<Notice_Recharge>() {
+      public Notice_Recharge parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Notice_Recharge(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Notice_Recharge> parser() {
+      return PARSER;
+    }
+
+    @Override
+    public com.google.protobuf.Parser<Notice_Recharge> getParserForType() {
+      return PARSER;
+    }
+
+    public Notice_Recharge getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface Command_WealthACKOrBuilder extends
       // @@protoc_insertion_point(interface_extends:message.Command_WealthACK)
       com.google.protobuf.MessageOrBuilder {
@@ -9647,6 +10758,20 @@ public final class MessageProtos {
      */
     com.google.protobuf.ByteString
         getResponseBytes();
+
+    /**
+     * <code>required string dwID = 2;</code>
+     */
+    boolean hasDwID();
+    /**
+     * <code>required string dwID = 2;</code>
+     */
+    String getDwID();
+    /**
+     * <code>required string dwID = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDwIDBytes();
   }
   /**
    * Protobuf type {@code message.Command_AuthChallengeResponse}
@@ -9661,6 +10786,7 @@ public final class MessageProtos {
     }
     private Command_AuthChallengeResponse() {
       response_ = "";
+      dwID_ = "";
     }
 
     @Override
@@ -9695,6 +10821,12 @@ public final class MessageProtos {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
               response_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              dwID_ = bs;
               break;
             }
           }
@@ -9764,6 +10896,48 @@ public final class MessageProtos {
       }
     }
 
+    public static final int DWID_FIELD_NUMBER = 2;
+    private volatile Object dwID_;
+    /**
+     * <code>required string dwID = 2;</code>
+     */
+    public boolean hasDwID() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string dwID = 2;</code>
+     */
+    public String getDwID() {
+      Object ref = dwID_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          dwID_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string dwID = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDwIDBytes() {
+      Object ref = dwID_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        dwID_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -9771,6 +10945,10 @@ public final class MessageProtos {
       if (isInitialized == 0) return false;
 
       if (!hasResponse()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDwID()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -9783,6 +10961,9 @@ public final class MessageProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, response_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dwID_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -9793,6 +10974,9 @@ public final class MessageProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, response_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dwID_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -9816,6 +11000,11 @@ public final class MessageProtos {
         result = result && getResponse()
             .equals(other.getResponse());
       }
+      result = result && (hasDwID() == other.hasDwID());
+      if (hasDwID()) {
+        result = result && getDwID()
+            .equals(other.getDwID());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -9830,6 +11019,10 @@ public final class MessageProtos {
       if (hasResponse()) {
         hash = (37 * hash) + RESPONSE_FIELD_NUMBER;
         hash = (53 * hash) + getResponse().hashCode();
+      }
+      if (hasDwID()) {
+        hash = (37 * hash) + DWID_FIELD_NUMBER;
+        hash = (53 * hash) + getDwID().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -9951,6 +11144,8 @@ public final class MessageProtos {
         super.clear();
         response_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
+        dwID_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -9979,6 +11174,10 @@ public final class MessageProtos {
           to_bitField0_ |= 0x00000001;
         }
         result.response_ = response_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.dwID_ = dwID_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10026,6 +11225,11 @@ public final class MessageProtos {
           response_ = other.response_;
           onChanged();
         }
+        if (other.hasDwID()) {
+          bitField0_ |= 0x00000002;
+          dwID_ = other.dwID_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -10033,6 +11237,9 @@ public final class MessageProtos {
 
       public final boolean isInitialized() {
         if (!hasResponse()) {
+          return false;
+        }
+        if (!hasDwID()) {
           return false;
         }
         return true;
@@ -10129,6 +11336,82 @@ public final class MessageProtos {
   }
   bitField0_ |= 0x00000001;
         response_ = value;
+        onChanged();
+        return this;
+      }
+
+      private Object dwID_ = "";
+      /**
+       * <code>required string dwID = 2;</code>
+       */
+      public boolean hasDwID() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string dwID = 2;</code>
+       */
+      public String getDwID() {
+        Object ref = dwID_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            dwID_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>required string dwID = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDwIDBytes() {
+        Object ref = dwID_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          dwID_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string dwID = 2;</code>
+       */
+      public Builder setDwID(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        dwID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string dwID = 2;</code>
+       */
+      public Builder clearDwID() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dwID_ = getDefaultInstance().getDwID();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string dwID = 2;</code>
+       */
+      public Builder setDwIDBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        dwID_ = value;
         onChanged();
         return this;
       }
@@ -10686,6 +11969,11 @@ public final class MessageProtos {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_message_Notice_Like_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_message_Notice_Recharge_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_message_Notice_Recharge_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_message_Command_WealthACK_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -10714,48 +12002,52 @@ public final class MessageProtos {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\017dwmessage.proto\022\007message\"\346\002\n\007Message\022*" +
-      "\n\004type\030\003 \002(\0162\034.message.Message.MessageTy" +
-      "pe\022\013\n\003mid\030\004 \002(\003\022\014\n\004time\030\005 \002(\003\022\014\n\004data\030\006 " +
-      "\001(\014\"\205\002\n\013MessageType\022\r\n\tCHAT_TEXT\020\000\022\016\n\nCH" +
-      "AT_AUDIO\020\001\022\016\n\nCHAT_IMAGE\020\002\022\010\n\004LIST\020\003\022\026\n\022" +
-      "COMMAND_WEALTH_ACK\020\n\022\033\n\027COMMAND_MSG_SYNC" +
-      "_NOTIFY\020\013\022\034\n\030COMMAND_MSG_SYNC_REQUEST\020\014\022" +
-      "\030\n\024COMMAND_MSG_SYNC_FIN\020\r\022\032\n\026COMMAND_AUT" +
-      "H_CHALLENGE\020\016\022#\n\037COMMAND_AUTH_CHALLENGE_" +
-      "RESPONSE\020\017\022\017\n\013NOTICE_LIKE\020d\"6\n\020MessageCo",
-      "ntainer\022\"\n\010messages\030\001 \003(\0132\020.message.Mess" +
-      "age\"\326\001\n\020AudioChatMessage\022%\n\006status\030\001 \001(\016" +
-      "2\025.message.ChargeStatus\022\026\n\016receiverWealt" +
-      "h\030\002 \001(\t\022\016\n\006tempID\030\003 \001(\t\022)\n\014relationType\030" +
-      "\004 \002(\0162\023.message.FriendType\022\016\n\006fromID\030\005 \002" +
-      "(\t\022\014\n\004toID\030\006 \002(\t\022\r\n\005extra\030\007 \001(\014\022\016\n\006lengt" +
-      "h\030\010 \002(\005\022\013\n\003url\030\t \002(\t\"\330\001\n\020ImageChatMessag" +
-      "e\022%\n\006status\030\001 \001(\0162\025.message.ChargeStatus" +
-      "\022\026\n\016receiverWealth\030\002 \001(\t\022\016\n\006tempID\030\003 \001(\t" +
-      "\022)\n\014relationType\030\004 \002(\0162\023.message.FriendT",
-      "ype\022\016\n\006fromID\030\005 \002(\t\022\014\n\004toID\030\006 \002(\t\022\r\n\005ext" +
-      "ra\030\007 \001(\014\022\020\n\010compress\030\010 \002(\014\022\013\n\003url\030\t \002(\t\"" +
-      "\306\001\n\017TextChatMessage\022%\n\006status\030\001 \001(\0162\025.me" +
-      "ssage.ChargeStatus\022\026\n\016receiverWealth\030\002 \001" +
-      "(\t\022\016\n\006tempID\030\003 \001(\t\022)\n\014relationType\030\004 \002(\016" +
-      "2\023.message.FriendType\022\016\n\006fromID\030\005 \002(\t\022\014\n" +
-      "\004toID\030\006 \002(\t\022\r\n\005extra\030\007 \001(\014\022\014\n\004text\030\010 \002(\t" +
-      "\"k\n\013Notice_Like\022\021\n\treceivers\030\001 \003(\t\022\016\n\006li" +
-      "keID\030\002 \002(\t\022\020\n\010belikeID\030\003 \002(\t\022\014\n\004icon\030\004 \001" +
-      "(\t\022\014\n\004name\030\005 \001(\t\022\013\n\003sex\030\006 \001(\t\"\251\001\n\021Comman",
-      "d_WealthACK\022\016\n\006tempID\030\001 \002(\t\022\013\n\003mid\030\002 \002(\003" +
-      "\022\016\n\006wealth\030\003 \002(\005\022)\n\014relationType\030\004 \002(\0162\023" +
-      ".message.FriendType\022%\n\006status\030\005 \002(\0162\025.me" +
-      "ssage.ChargeStatus\022\025\n\rchargeSuccess\030\006 \002(" +
-      "\010\"0\n\025Command_AuthChallenge\022\027\n\017challengeS" +
-      "tring\030\001 \002(\t\"1\n\035Command_AuthChallengeResp" +
-      "onse\022\020\n\010response\030\001 \002(\t\"&\n\023Command_SyncRe" +
-      "quest\022\017\n\007syncNum\030\001 \002(\003*&\n\nFriendType\022\014\n\010" +
-      "STRANGER\020\000\022\n\n\006FRIEND\020\001*2\n\014ChargeStatus\022\t" +
-      "\n\005NOMAL\020\000\022\010\n\004FREE\020\001\022\r\n\tORVERFLOW\020\002B:\n)on",
-      "line.decentworld.rpc.dto.message.protosB" +
-      "\rMessageProtos"
+      "\n\017dwmessage.proto\022\007message\"\320\003\n\007Message\022\014" +
+      "\n\004from\030\001 \002(\t\022\n\n\002to\030\002 \002(\t\022*\n\004type\030\003 \002(\0162\034" +
+      ".message.Message.MessageType\022\013\n\003mid\030\004 \002(" +
+      "\003\022\014\n\004time\030\005 \002(\003\022\014\n\004data\030\006 \001(\014\"\325\002\n\013Messag" +
+      "eType\022\r\n\tCHAT_TEXT\020\000\022\016\n\nCHAT_AUDIO\020\001\022\016\n\n" +
+      "CHAT_IMAGE\020\002\022\010\n\004LIST\020\003\022\026\n\022COMMAND_WEALTH" +
+      "_ACK\020\n\022\033\n\027COMMAND_MSG_SYNC_NOTIFY\020\013\022\034\n\030C" +
+      "OMMAND_MSG_SYNC_REQUEST\020\014\022\030\n\024COMMAND_MSG" +
+      "_SYNC_FIN\020\r\022\032\n\026COMMAND_AUTH_CHALLENGE\020\016\022" +
+      "#\n\037COMMAND_AUTH_CHALLENGE_RESPONSE\020\017\022\'\n#",
+      "COMMAND_AUTH_CHALLENGE_RESPONSE_ACK\020\020\022\020\n" +
+      "\014COMMAND_PING\020\021\022\017\n\013NOTICE_LIKE\020d\022\023\n\017NOTI" +
+      "CE_RECHARGE\020e\"6\n\020MessageContainer\022\"\n\010mes" +
+      "sages\030\001 \003(\0132\020.message.Message\"\326\001\n\020AudioC" +
+      "hatMessage\022%\n\006status\030\001 \001(\0162\025.message.Cha" +
+      "rgeStatus\022\026\n\016receiverWealth\030\002 \001(\t\022\016\n\006tem" +
+      "pID\030\003 \001(\t\022)\n\014relationType\030\004 \002(\0162\023.messag" +
+      "e.FriendType\022\016\n\006fromID\030\005 \002(\t\022\014\n\004toID\030\006 \002" +
+      "(\t\022\r\n\005extra\030\007 \001(\014\022\016\n\006length\030\010 \002(\005\022\013\n\003url" +
+      "\030\t \002(\t\"\330\001\n\020ImageChatMessage\022%\n\006status\030\001 ",
+      "\001(\0162\025.message.ChargeStatus\022\026\n\016receiverWe" +
+      "alth\030\002 \001(\t\022\016\n\006tempID\030\003 \001(\t\022)\n\014relationTy" +
+      "pe\030\004 \002(\0162\023.message.FriendType\022\016\n\006fromID\030" +
+      "\005 \002(\t\022\014\n\004toID\030\006 \002(\t\022\r\n\005extra\030\007 \001(\014\022\020\n\010co" +
+      "mpress\030\010 \002(\014\022\013\n\003url\030\t \002(\t\"\306\001\n\017TextChatMe" +
+      "ssage\022%\n\006status\030\001 \001(\0162\025.message.ChargeSt" +
+      "atus\022\026\n\016receiverWealth\030\002 \001(\t\022\016\n\006tempID\030\003" +
+      " \001(\t\022)\n\014relationType\030\004 \002(\0162\023.message.Fri" +
+      "endType\022\016\n\006fromID\030\005 \002(\t\022\014\n\004toID\030\006 \002(\t\022\r\n" +
+      "\005extra\030\007 \001(\014\022\014\n\004text\030\010 \002(\t\"k\n\013Notice_Lik",
+      "e\022\021\n\treceivers\030\001 \003(\t\022\016\n\006likeID\030\002 \002(\t\022\020\n\010" +
+      "belikeID\030\003 \002(\t\022\014\n\004icon\030\004 \001(\t\022\014\n\004name\030\005 \001" +
+      "(\t\022\013\n\003sex\030\006 \001(\t\"=\n\017Notice_Recharge\022\014\n\004dw" +
+      "ID\030\001 \002(\t\022\014\n\004time\030\002 \002(\003\022\016\n\006amount\030\003 \002(\005\"\251" +
+      "\001\n\021Command_WealthACK\022\016\n\006tempID\030\001 \002(\t\022\013\n\003" +
+      "mid\030\002 \002(\003\022\016\n\006wealth\030\003 \002(\005\022)\n\014relationTyp" +
+      "e\030\004 \002(\0162\023.message.FriendType\022%\n\006status\030\005" +
+      " \002(\0162\025.message.ChargeStatus\022\025\n\rchargeSuc" +
+      "cess\030\006 \002(\010\"0\n\025Command_AuthChallenge\022\027\n\017c" +
+      "hallengeString\030\001 \002(\t\"?\n\035Command_AuthChal",
+      "lengeResponse\022\020\n\010response\030\001 \002(\t\022\014\n\004dwID\030" +
+      "\002 \002(\t\"&\n\023Command_SyncRequest\022\017\n\007syncNum\030" +
+      "\001 \002(\003*&\n\nFriendType\022\014\n\010STRANGER\020\000\022\n\n\006FRI" +
+      "END\020\001*2\n\014ChargeStatus\022\t\n\005NOMAL\020\000\022\010\n\004FREE" +
+      "\020\001\022\r\n\tORVERFLOW\020\002B:\n)online.decentworld." +
+      "rpc.dto.message.protosB\rMessageProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10774,7 +12066,7 @@ public final class MessageProtos {
     internal_static_message_Message_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Message_descriptor,
-        new String[] { "Type", "Mid", "Time", "Data", });
+        new String[] { "From", "To", "Type", "Mid", "Time", "Data", });
     internal_static_message_MessageContainer_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_message_MessageContainer_fieldAccessorTable = new
@@ -10805,26 +12097,32 @@ public final class MessageProtos {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Notice_Like_descriptor,
         new String[] { "Receivers", "LikeID", "BelikeID", "Icon", "Name", "Sex", });
-    internal_static_message_Command_WealthACK_descriptor =
+    internal_static_message_Notice_Recharge_descriptor =
       getDescriptor().getMessageTypes().get(6);
+    internal_static_message_Notice_Recharge_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_message_Notice_Recharge_descriptor,
+        new String[] { "DwID", "Time", "Amount", });
+    internal_static_message_Command_WealthACK_descriptor =
+      getDescriptor().getMessageTypes().get(7);
     internal_static_message_Command_WealthACK_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Command_WealthACK_descriptor,
         new String[] { "TempID", "Mid", "Wealth", "RelationType", "Status", "ChargeSuccess", });
     internal_static_message_Command_AuthChallenge_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_message_Command_AuthChallenge_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Command_AuthChallenge_descriptor,
         new String[] { "ChallengeString", });
     internal_static_message_Command_AuthChallengeResponse_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_message_Command_AuthChallengeResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Command_AuthChallengeResponse_descriptor,
-        new String[] { "Response", });
+        new String[] { "Response", "DwID", });
     internal_static_message_Command_SyncRequest_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_message_Command_SyncRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_message_Command_SyncRequest_descriptor,

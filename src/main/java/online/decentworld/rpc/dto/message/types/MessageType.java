@@ -5,8 +5,8 @@ package online.decentworld.rpc.dto.message.types;
  */
 public enum MessageType {
     CHAT_TEXT(0),CHAT_AUDIO(1),CHAT_IMAGE(2),LIST(3)
-    ,COMMAND_WEALTH_ACK(10),COMMAND_MSG_SYNC_NOTIFY(11),COMMAND_MSG_SYNC_REQUEST(12),COMMAND_MSG_SYNC_FIN(13),COMMAND_AUTH_CHALLENGE(14),COMMAND_AUTH_CHALLENGE_RESPONSE(15)
-    ,NOTICE_LIKE(100);
+    ,COMMAND_WEALTH_ACK(10),COMMAND_MSG_SYNC_NOTIFY(11),COMMAND_MSG_SYNC_REQUEST(12),COMMAND_MSG_SYNC_FIN(13),COMMAND_AUTH_CHALLENGE(14),COMMAND_AUTH_CHALLENGE_RESPONSE(15),COMMAND_AUTH_CHALLENGE_RESPONSE_ACK(16),COMMAND_PING(17)
+    ,NOTICE_LIKE(100),NOTICE_RECHARGE(101);
 
     private int code;
 
@@ -25,5 +25,13 @@ public enum MessageType {
             }
         }
         return null;
+    }
+
+    public static boolean isChatMessage(MessageType type){
+        if(type==CHAT_TEXT||type==CHAT_AUDIO||type==CHAT_AUDIO){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
