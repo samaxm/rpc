@@ -6,6 +6,7 @@ public class ResultBean {
 	private int statusCode;
 	private String msg;
 	final public static ResultBean SUCCESS=new ObjectResultBean(StatusCode.SUCCESS,null,null);
+	final public static ResultBean AUTH_FAIL=new ObjectResultBean(StatusCode.AUTH_FAIL,null,null);
 	public int getStatusCode() {
 		return statusCode;
 	}
