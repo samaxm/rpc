@@ -73,8 +73,6 @@
 					</includes>
 				</configuration>
 			</plugin>-->
-
-
 			<!--<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.6</version>
@@ -132,7 +130,7 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<filters>
+							<!--<filters>
 								<filter>
 									<artifact>*:*</artifact>
 									<includes>
@@ -141,7 +139,7 @@
 										<include>online/decentworld/rpc/**</include>
 									</includes>
 								</filter>
-							</filters>
+							</filters>-->
 							<relocations>
 								<relocation>
 									<pattern>com.google.protobuf</pattern>

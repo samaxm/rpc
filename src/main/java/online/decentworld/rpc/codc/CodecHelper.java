@@ -34,6 +34,7 @@ public class CodecHelper {
         return MessageProtos.Message.newBuilder().setData(container.toByteString())
                 .setType(MessageProtos.Message.MessageType.LIST)
                 .setMid(maxMid).setTime(System.currentTimeMillis())
+                .setFrom(to).setTo(from)
                 .build().toByteArray();
     }
 
